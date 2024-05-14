@@ -1011,7 +1011,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         try {
-            String selectedOption = (String) jComboBox1.getSelectedItem();
+            String selectedOption = jComboBox1.getSelectedItem().toString();
             Team team = sportsLeagueSystem.getTeamByName(selectedOption);
             jTextArea1.setText(team.toString());
             jTextArea1.append("\n\n");
@@ -1021,9 +1021,8 @@ public class Home extends javax.swing.JFrame {
                 jTextArea1.append(player.printableMember());
             }
         } catch (Exception e) {
+            e.printStackTrace();
             jTextArea1.setText("Team not found!");
-        } finally {
-
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 

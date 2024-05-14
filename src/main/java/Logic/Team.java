@@ -77,6 +77,14 @@ public class Team implements Serializable {
         return stadiumCapacity;
     }
 
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Team.count = count;
+    }
+
     @Override
     public String toString() {
         return getName();
