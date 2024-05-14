@@ -4,14 +4,10 @@
  */
 package Logic;
 
-import java.util.*;
+import java.util.Scanner;
 
-/**
- *
- * @author Rehan
- */
 public class Manager extends Member {
-   private double bonusPercentage;
+    private double bonusPercentage;
     private String coachingQualifications;
 
     public Manager(Scanner scanner) {
@@ -49,5 +45,10 @@ public class Manager extends Member {
 
     public void setCoachingQualifications(String coachingQualifications) {
         this.coachingQualifications = coachingQualifications;
-    }   
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

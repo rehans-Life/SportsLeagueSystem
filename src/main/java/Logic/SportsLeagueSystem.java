@@ -4,8 +4,14 @@
  */
 package Logic;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  *
@@ -20,11 +26,11 @@ public class SportsLeagueSystem {
         teams = new ArrayList<>();
         players = new ArrayList<>();
         serializedFile = "sportsLeague.ser";
-        
+
         File file = new File(serializedFile);
-        
+
         if (file.exists()) {
-            deserialize();       
+            deserialize();
         } else {
             cleanStart("startup.txt");
         }
@@ -48,26 +54,26 @@ public class SportsLeagueSystem {
 
     public ArrayList<Player> getPlayersFromTeam(int teamId) {
         ArrayList<Player> teamPlayers = new ArrayList<>();
-        
-        for (Player player: players) {
+
+        for (Player player : players) {
             if (player.getTeamId() == teamId) {
                 teamPlayers.add(player);
             }
         }
-        
+
         return teamPlayers;
     }
 
     public void cleanStart(String startupFilePath) {
         File file = new File(startupFilePath);
         Scanner scanner = null;
-        
+
         teams.clear();
         players.clear();
 
         try {
             scanner = new Scanner(file);
-            
+
             int numberOfTeams = scanner.nextInt();
             scanner.nextLine();
 
@@ -99,7 +105,8 @@ public class SportsLeagueSystem {
             e.printStackTrace();
             System.out.println("Not Found");
         } finally {
-            if (scanner != null) scanner.close();
+            if (scanner != null)
+                scanner.close();
         }
     }
 
@@ -138,10 +145,10 @@ public class SportsLeagueSystem {
 
             ArrayList<Player> newPlayers = (ArrayList<Player>) hashMap.get("players");
             ArrayList<Team> newTeams = (ArrayList<Team>) hashMap.get("teams");
-            
+
             setTeams(teams);
             setPlayers(players);
-            
+
             Member.setCount(newPlayers.size() + newTeams.size() + 1);
 
             objectInputStream.close();
@@ -176,7 +183,31 @@ public class SportsLeagueSystem {
         }
         throw new Exception("Team not found");
     }
-    
+
+    public ArrayList<String> getPlayerIdAsString() {
+        ArrayList<String> playerIdList = new ArrayList<>();
+
+        for (Player player : players) {
+            playerIdList.add(String.valueOf(player.getId()));
+        }
+        return playerIdList;
+    }
+
+    public void alterMember(Player player, String name, String address, String nationality, String dob,
+            String position, double salary, boolean isCaptain, int teamId) throws Exception {
+        if (salary < 0) {
+            throw new IllegalArgumentException("Salary cannot be negative");
+        }
+        player.setName(name);
+        player.setAddress(address);
+        player.setNationality(nationality);
+        player.setDateOfBirth(dob);
+        player.setPosition(position);
+        player.setYearlySalary(salary);
+        player.setCaptain(isCaptain);
+        player.setTeamId(teamId);
+    }
+
     public String[] getTeamNames() {
         int teamsSize = teams.size();
 
@@ -184,10 +215,10 @@ public class SportsLeagueSystem {
         for (int i = 0; i < teamsSize; i++) {
             teamNames[i] = teams.get(i).getName();
         }
-        
+
         return teamNames;
     }
-    
+
     public Team getTeamByName(String teamName) throws Exception {
         for (Team team : teams) {
             if (team.getName().equalsIgnoreCase(teamName))

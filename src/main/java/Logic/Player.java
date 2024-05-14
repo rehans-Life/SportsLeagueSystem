@@ -4,7 +4,7 @@
  */
 package Logic;
 
-import java.util.*;
+import java.util.Scanner;
 
 /**
  *
@@ -70,5 +70,6 @@ public class Player extends Member {
 
     public int getTeamId() {
         return teamId;
-    }   
+    }
+
 }
