@@ -219,6 +219,17 @@ public class SportsLeagueSystem {
         return teamNames;
     }
 
+    public String[] getPlayerIDs() {
+        int numOfPlayers = players.size();
+
+        String[] playerId = new String[numOfPlayers];
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerId[i] = String.valueOf(players.get(i).getId());
+        }
+
+        return playerId;
+    }
+
     public Team getTeamByName(String teamName) throws Exception {
         for (Team team : teams) {
             if (team.getName().equalsIgnoreCase(teamName))

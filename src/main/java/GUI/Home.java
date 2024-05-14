@@ -45,6 +45,8 @@ public class Home extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -86,7 +88,6 @@ public class Home extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox(sportsLeagueSystem.getPlayers().toArray());
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
         jLabel37 = new javax.swing.JLabel();
@@ -113,6 +114,7 @@ public class Home extends javax.swing.JFrame {
         jLabel44 = new javax.swing.JLabel();
         jComboBox3 = new javax.swing.JComboBox<>();
         jButton8 = new javax.swing.JButton();
+        jComboBox2 = new javax.swing.JComboBox(sportsLeagueSystem.getPlayers().toArray());
         jPanel7 = new javax.swing.JPanel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -546,12 +548,6 @@ public class Home extends javax.swing.JFrame {
 
         jLabel34.setText("Player ID");
 
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
-            }
-        });
-
         jLabel37.setText("Address");
 
         jScrollPane3.setViewportView(jTextPane1);
@@ -594,6 +590,13 @@ public class Home extends javax.swing.JFrame {
 
         jButton8.setText("ALTER PLAYER");
 
+        jComboBox2.setModel(new DefaultComboBoxModel(sportsLeagueSystem.getPlayerIDs()));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -625,55 +628,75 @@ public class Home extends javax.swing.JFrame {
                                                         javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(jPanel6Layout.createSequentialGroup()
                                                 .addGap(59, 59, 59)
-                                                .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 64,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(340, 340, 340)
-                                                .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 64,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(jPanel6Layout.createSequentialGroup()
-                                                .addGap(59, 59, 59)
                                                 .addGroup(jPanel6Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                false)
-                                                        .addComponent(jComboBox2,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 142,
-                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jLabel38, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(jScrollPane4)
-                                                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(jPanel6Layout.createSequentialGroup()
                                                                 .addGroup(jPanel6Layout.createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addGroup(jPanel6Layout.createParallelGroup(
+                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                false)
+                                                                                .addComponent(jLabel38,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        73,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addComponent(jLabel39,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                        53,
+                                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                                .addGroup(jPanel6Layout
+                                                                                        .createSequentialGroup()
+                                                                                        .addGroup(jPanel6Layout
+                                                                                                .createParallelGroup(
+                                                                                                        javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                                        false)
+                                                                                                .addComponent(jLabel44,
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                        53,
+                                                                                                        Short.MAX_VALUE)
+                                                                                                .addComponent(
+                                                                                                        jRadioButton1,
+                                                                                                        javax.swing.GroupLayout.Alignment.LEADING,
+                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                                        Short.MAX_VALUE))
+                                                                                        .addGap(6, 6, 6)
+                                                                                        .addComponent(jRadioButton2))
+                                                                                .addComponent(jComboBox3, 0,
+                                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                                        Short.MAX_VALUE))
+                                                                        .addComponent(jComboBox2,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                141,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jScrollPane4,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                143,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(216, 216, 216)
+                                                                .addGroup(jPanel6Layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING,
                                                                         false)
-                                                                        .addComponent(jLabel44,
-                                                                                javax.swing.GroupLayout.Alignment.LEADING,
+                                                                        .addComponent(jLabel41)
+                                                                        .addComponent(jScrollPane5)
+                                                                        .addComponent(jScrollPane6)
+                                                                        .addComponent(jLabel42)
+                                                                        .addComponent(jScrollPane7)
+                                                                        .addComponent(jLabel43)
+                                                                        .addComponent(jScrollPane8)
+                                                                        .addComponent(jButton8,
                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                53, Short.MAX_VALUE)
-                                                                        .addComponent(jRadioButton1,
-                                                                                javax.swing.GroupLayout.Alignment.LEADING,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                Short.MAX_VALUE))
-                                                                .addGap(6, 6, 6)
-                                                                .addComponent(jRadioButton2))
-                                                        .addComponent(jComboBox3, 0,
-                                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                                .addGap(261, 261, 261)
-                                                .addGroup(jPanel6Layout
-                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING,
-                                                                false)
-                                                        .addComponent(jLabel41)
-                                                        .addComponent(jScrollPane5)
-                                                        .addComponent(jScrollPane6)
-                                                        .addComponent(jLabel42)
-                                                        .addComponent(jScrollPane7)
-                                                        .addComponent(jLabel43)
-                                                        .addComponent(jScrollPane8)
-                                                        .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                151, Short.MAX_VALUE))))
-                                .addGap(0, 137, Short.MAX_VALUE)));
+                                                                                151, Short.MAX_VALUE)))
+                                                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                                                .addComponent(jLabel34,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 64,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addGap(340, 340, 340)
+                                                                .addComponent(jLabel40,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 64,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 181, Short.MAX_VALUE)));
         jPanel6Layout.setVerticalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel6Layout.createSequentialGroup()
@@ -682,15 +705,17 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(jLabel17)
                                 .addGap(12, 12, 12)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel34)
-                                        .addComponent(jLabel40))
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(jPanel6Layout.createSequentialGroup()
+                                                .addGroup(jPanel6Layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(jLabel34)
+                                                        .addComponent(jLabel40))
+                                                .addGap(6, 6, 6)
+                                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(10, 10, 10)
