@@ -13,6 +13,6 @@ import GUI.Home;
 public class SportsLeagueSystemDriver {
 
     public static void main(String[] args) {
-        javax.swing.JFrame home = new Home();
+        Home home = new Home();
     }
 }

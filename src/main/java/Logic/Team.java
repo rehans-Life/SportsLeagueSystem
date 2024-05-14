@@ -79,8 +79,6 @@ public class Team implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("Team Id: %s, Name: %s, Stadium Name: %s, Stadium Capacity: %s, Manager: %s", getTeamId(),
-                getName(),
-                getStadiumName(), getStadiumCapacity(), getManager());
+        return getName();
     }   
 }

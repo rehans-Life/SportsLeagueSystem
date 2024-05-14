@@ -13,7 +13,7 @@ import java.awt.event.*;
  * @author Rehan
  */
 public class Home extends javax.swing.JFrame {
-    SportsLeagueSystem sportsLeagueSystem;
+    private SportsLeagueSystem sportsLeagueSystem;
     /**
      * Creates new form Home
      */
@@ -29,6 +29,10 @@ public class Home extends javax.swing.JFrame {
                 sportsLeagueSystem.exit();
             }
         });
+    }
+
+    public SportsLeagueSystem getSportsLeagueSystem() {
+        return sportsLeagueSystem;
     }
 
     /**
@@ -63,7 +67,7 @@ public class Home extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>(sportsLeagueSystem.getTeamNames());
+        jComboBox1 = new javax.swing.JComboBox(sportsLeagueSystem.getTeams().toArray());
         jLabel11 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -1009,12 +1013,12 @@ public class Home extends javax.swing.JFrame {
         try {
             String selectedOption = (String) jComboBox1.getSelectedItem();
             Team team = sportsLeagueSystem.getTeamByName(selectedOption);
-            jTextArea1.setText(team.getName());
+            jTextArea1.setText(team.toString());
             jTextArea1.append("\n\n");
-            jTextArea1.append("Manager:" + team.getManager().toString());
+            jTextArea1.append("Manager:" + team.getManager().printableMember());
 
             for (Player player: sportsLeagueSystem.getPlayersFromTeam(team.getTeamId())) {
-                jTextArea1.append(player.toString());
+                jTextArea1.append(player.printableMember());
             }
         } catch (Exception e) {
             jTextArea1.setText("Team not found!");

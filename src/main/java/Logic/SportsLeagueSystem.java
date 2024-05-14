@@ -136,8 +136,13 @@ public class SportsLeagueSystem {
 
             HashMap<String, Object> hashMap = (HashMap<String, Object>) objectInputStream.readObject();
 
-            setTeams((ArrayList<Team>) hashMap.get("teams"));
-            setPlayers((ArrayList<Player>) hashMap.get("players"));
+            ArrayList<Player> newPlayers = (ArrayList<Player>) hashMap.get("players");
+            ArrayList<Team> newTeams = (ArrayList<Team>) hashMap.get("teams");
+            
+            setTeams(teams);
+            setPlayers(players);
+            
+            Member.setCount(newPlayers.size() + newTeams.size() + 1);
 
             objectInputStream.close();
             fileInputStream.close();

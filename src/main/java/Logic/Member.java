@@ -93,8 +93,20 @@ public class Member implements Serializable {
         return yearlySalary;
     }
 
-    @Override
-    public String toString() {
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Member.count = count;
+    }
+
+    public String printableMember() {
         return String.format("\nID: %s\nName: %s\nYear Salary: %s\n", getId(), getName(), getYearlySalary());
     }   
+    
+    @Override
+    public String toString() {
+        return getName();
+    }
 }
