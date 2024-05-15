@@ -207,9 +207,6 @@ public class SportsLeagueSystem {
         player.setYearlySalary(salary);
         player.setCaptain(isCaptain);
         player.setTeamId(teamId);
-
-        players.set(player.getId(), player);
-        serialize();
     }
 
     public Team getTeam(int teamId) throws Exception {
@@ -218,6 +215,14 @@ public class SportsLeagueSystem {
                 return team;
         }
         throw new Exception("Team not found");
+    }
+    
+    public Player getPlayer(int playerId) throws Exception {
+        for (Player player : players) {
+            if (player.getId() == playerId)
+                return player;
+        }
+        throw new Exception("Player not found");
     }
 
     public String[] getTeamNames() {

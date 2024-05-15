@@ -816,13 +816,15 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="jComboBox3" alignment="0" min="-2" pref="121" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
                               <Component id="jComboBox2" alignment="0" pref="137" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jTextField3" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
                           <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jComboBox3" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jTextField3" alignment="0" pref="135" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="278" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -934,14 +936,14 @@
             <Component class="javax.swing.JComboBox" name="jComboBox2">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                  <Connection code="new DefaultComboBoxModel(sportsLeagueSystem.getTeamNames())" type="code"/>
+                  <Connection code="new DefaultComboBoxModel(sportsLeagueSystem.getPlayerIDs())" type="code"/>
                 </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBox2ActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;(sportsLeagueSystem.getPlayers().toArray())"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(sportsLeagueSystem.getPlayers().toArray())"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
@@ -989,13 +991,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox3">
               <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                  <Connection code="new DefaultComboBoxModel&lt;String&gt;(sportsLeagueSystem.getTeamIDs())" type="code"/>
                 </Property>
               </Properties>
               <AuxValues>
@@ -1037,6 +1034,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="ALTER PLAYER"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton7ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
