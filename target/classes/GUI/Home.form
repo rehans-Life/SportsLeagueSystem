@@ -793,7 +793,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="303" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jLabel17" max="32767" attributes="0"/>
                           <Component id="jLabel16" max="32767" attributes="0"/>
@@ -804,7 +804,6 @@
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel34" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
-                          <Component id="jLabel39" min="-2" pref="43" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                               <Component id="jLabel35" min="-2" pref="86" max="-2" attributes="0"/>
@@ -823,8 +822,9 @@
                               <Component id="jComboBox2" alignment="0" pref="137" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jTextField3" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="jLabel39" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="278" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel40" min="-2" pref="62" max="-2" attributes="0"/>
                           <Component id="jTextField1" max="32767" attributes="0"/>
@@ -984,7 +984,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel39">
               <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel39"/>
+                <Property name="text" type="java.lang.String" value="Team ID"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="jComboBox3">
@@ -999,6 +999,7 @@
                 </Property>
               </Properties>
               <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(sportsLeagueSystem.getTeams().toArray())"/>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>

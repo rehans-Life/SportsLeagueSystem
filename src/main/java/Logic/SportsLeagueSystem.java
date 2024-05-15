@@ -187,9 +187,18 @@ public class SportsLeagueSystem {
 
     public void alterMember(Player player, String name, String address, String nationality, String dob,
             String position, double salary, boolean isCaptain, int teamId) throws Exception {
+
+        for (Player member : players) {
+            System.out.println(member.getName());
+        }
+        System.out.println("------------");
+
         if (salary < 0) {
             throw new IllegalArgumentException("Salary cannot be negative");
         }
+
+        // int playerIndex = players.indexOf(player);
+
         player.setName(name);
         player.setAddress(address);
         player.setNationality(nationality);
@@ -198,6 +207,9 @@ public class SportsLeagueSystem {
         player.setYearlySalary(salary);
         player.setCaptain(isCaptain);
         player.setTeamId(teamId);
+
+        players.set(player.getId(), player);
+        serialize();
     }
 
     public Team getTeam(int teamId) throws Exception {
@@ -217,6 +229,17 @@ public class SportsLeagueSystem {
         }
 
         return teamNames;
+    }
+
+    public String[] getTeamIDs() {
+        int teamsSize = teams.size();
+
+        String[] teamIDs = new String[teamsSize];
+        for (int i = 0; i < teamsSize; i++) {
+            teamIDs[i] = String.valueOf(teams.get(i).getTeamId());
+        }
+
+        return teamIDs;
     }
 
     public String[] getPlayerIDs() {

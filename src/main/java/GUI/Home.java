@@ -45,6 +45,7 @@ public class Home extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -97,7 +98,7 @@ public class Home extends javax.swing.JFrame {
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jLabel39 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        jComboBox3 = new javax.swing.JComboBox(sportsLeagueSystem.getTeams().toArray());
         jLabel40 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel41 = new javax.swing.JLabel();
@@ -569,10 +570,10 @@ public class Home extends javax.swing.JFrame {
 
         jRadioButton2.setText("No");
 
-        jLabel39.setText("jLabel39");
+        jLabel39.setText("Team ID");
 
         jComboBox3.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+                new DefaultComboBoxModel(sportsLeagueSystem.getTeamIDs()));
 
         jLabel40.setText("Name");
 
@@ -594,7 +595,7 @@ public class Home extends javax.swing.JFrame {
         jPanel6Layout.setHorizontalGroup(
                 jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                                .addContainerGap(303, Short.MAX_VALUE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel6Layout
                                         .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE,
@@ -606,8 +607,6 @@ public class Home extends javax.swing.JFrame {
                                 .addGap(74, 74, 74)
                                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 77,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel39, javax.swing.GroupLayout.PREFERRED_SIZE, 43,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGroup(jPanel6Layout.createSequentialGroup()
                                                 .addGap(77, 77, 77)
@@ -631,9 +630,10 @@ public class Home extends javax.swing.JFrame {
                                                 .addComponent(jComboBox2, javax.swing.GroupLayout.Alignment.LEADING, 0,
                                                         137, Short.MAX_VALUE))
                                         .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 135,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel39))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 278,
+                                        Short.MAX_VALUE)
                                 .addGroup(jPanel6Layout
                                         .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel40, javax.swing.GroupLayout.PREFERRED_SIZE, 62,
@@ -1271,8 +1271,12 @@ public class Home extends javax.swing.JFrame {
                     // Save changes to the sports league system
                     sportsLeagueSystem.alterMember(player, name, address, nationality, dob, position, salary,
                             isCaptain, teamIdNum);
+
+                    // updatePlayerGUIComponents(player);
+
                     JOptionPane.showMessageDialog(this, "Player details updated successfully!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
+
                 }
             }
 
@@ -1397,6 +1401,19 @@ public class Home extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_jRadioButton1ActionPerformed
+
+    // private void updatePlayerGUIComponents(Player player) {
+    // jComboBox2.setSelectedItem(String.valueOf(player.getId()));
+    // jTextField1.setText(player.getName());
+    // jTextField2.setText(player.getAddress());
+    // jTextField3.setText(player.getNationality());
+    // jTextField4.setText(player.getDateOfBirth());
+    // jTextField5.setText(player.getPosition());
+    // jTextField6.setText(String.valueOf(player.getYearlySalary()));
+    // jRadioButton1.setSelected(player.isCaptain());
+    // jRadioButton2.setSelected(!player.isCaptain());
+    // jComboBox3.setSelectedItem(String.valueOf(player.getTeamId()));
+    // }
 
     /**
      * @param args the command line arguments
