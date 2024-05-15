@@ -1,11 +1,7 @@
-Logic\Member.class
-Logic\Team.class
-Logic\Player.class
 GUI\Home$16.class
 GUI\Home$8.class
 GUI\Home$3.class
 GUI\Home$12.class
-Logic\SportsLeagueSystem.class
 GUI\Home$11.class
 GUI\Home$6.class
 Logic\Manager.class

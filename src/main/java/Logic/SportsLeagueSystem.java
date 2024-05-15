@@ -4,8 +4,14 @@
  */
 package Logic;
 
-import java.util.*;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Scanner;
 
 /**
  *
@@ -20,11 +26,11 @@ public class SportsLeagueSystem {
         teams = new ArrayList<>();
         players = new ArrayList<>();
         serializedFile = "sportsLeague.ser";
-        
+
         File file = new File(serializedFile);
-        
+
         if (file.exists()) {
-            deserialize();       
+            deserialize();
         } else {
             cleanStart("startup.txt");
         }
@@ -48,26 +54,26 @@ public class SportsLeagueSystem {
 
     public ArrayList<Player> getPlayersFromTeam(int teamId) {
         ArrayList<Player> teamPlayers = new ArrayList<>();
-        
-        for (Player player: players) {
+
+        for (Player player : players) {
             if (player.getTeamId() == teamId) {
                 teamPlayers.add(player);
             }
         }
-        
+
         return teamPlayers;
     }
 
     public void cleanStart(String startupFilePath) {
         File file = new File(startupFilePath);
         Scanner scanner = null;
-        
+
         teams.clear();
         players.clear();
 
         try {
             scanner = new Scanner(file);
-            
+
             int numberOfTeams = scanner.nextInt();
             scanner.nextLine();
 
@@ -99,7 +105,8 @@ public class SportsLeagueSystem {
             e.printStackTrace();
             System.out.println("Not Found");
         } finally {
-            if (scanner != null) scanner.close();
+            if (scanner != null)
+                scanner.close();
         }
     }
 
@@ -138,18 +145,18 @@ public class SportsLeagueSystem {
 
             ArrayList<Player> serializedPlayers = (ArrayList<Player>) hashMap.get("players");
             ArrayList<Team> serializedTeams = (ArrayList<Team>) hashMap.get("teams");
-            
+
             int totalManagers = 0;
-            
+
             for (Team team : serializedTeams) {
                 if (team.getManager() != null) {
                     totalManagers++;
                 }
             }
-            
+
             setTeams(serializedTeams);
             setPlayers(serializedPlayers);
-            
+
             Team.setCount(serializedTeams.size() + 1);
             Member.setCount(serializedPlayers.size() + totalManagers + 1);
 
@@ -178,6 +185,21 @@ public class SportsLeagueSystem {
         return teams;
     }
 
+    public void alterMember(Player player, String name, String address, String nationality, String dob,
+            String position, double salary, boolean isCaptain, int teamId) throws Exception {
+        if (salary < 0) {
+            throw new IllegalArgumentException("Salary cannot be negative");
+        }
+        player.setName(name);
+        player.setAddress(address);
+        player.setNationality(nationality);
+        player.setDateOfBirth(dob);
+        player.setPosition(position);
+        player.setYearlySalary(salary);
+        player.setCaptain(isCaptain);
+        player.setTeamId(teamId);
+    }
+
     public Team getTeam(int teamId) throws Exception {
         for (Team team : teams) {
             if (team.getTeamId() == teamId)
@@ -185,7 +207,7 @@ public class SportsLeagueSystem {
         }
         throw new Exception("Team not found");
     }
-    
+
     public String[] getTeamNames() {
         int teamsSize = teams.size();
 
@@ -193,10 +215,21 @@ public class SportsLeagueSystem {
         for (int i = 0; i < teamsSize; i++) {
             teamNames[i] = teams.get(i).getName();
         }
-        
+
         return teamNames;
     }
-    
+
+    public String[] getPlayerIDs() {
+        int numOfPlayers = players.size();
+
+        String[] playerId = new String[numOfPlayers];
+        for (int i = 0; i < numOfPlayers; i++) {
+            playerId[i] = String.valueOf(players.get(i).getId());
+        }
+
+        return playerId;
+    }
+
     public Team getTeamByName(String teamName) throws Exception {
         for (Team team : getTeams()) {
             if (team.getName().equalsIgnoreCase(teamName))
