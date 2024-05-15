@@ -7,6 +7,7 @@ package GUI;
 import Logic.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.text.ParseException;
 
 /**
  *
@@ -589,6 +590,11 @@ public class Home extends javax.swing.JFrame {
                 new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jButton8.setText("ALTER PLAYER");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jComboBox2.setModel(new DefaultComboBoxModel(sportsLeagueSystem.getPlayerIDs()));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -1309,12 +1315,10 @@ public class Home extends javax.swing.JFrame {
             String nationality = jTextPane2.getText().trim();
             String dob = jTextPane4.getText().trim();
             String position = jTextPane5.getText().trim();
-            double salary = Double.parseDouble(jTextPane6.getText().trim());
+            double salary = Double.parseDouble(jTextPane6.getText());
             boolean isCaptain = jRadioButton1.isSelected();
             String teamId = jComboBox3.getSelectedItem().toString();
 
-            // Validate the inputs (you might want to implement more comprehensive
-            // validation)
             if (name.isEmpty() || address.isEmpty() || nationality.isEmpty() || position.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Please fill all fields properly.", "Input Error",
                         JOptionPane.ERROR_MESSAGE);
@@ -1322,8 +1326,10 @@ public class Home extends javax.swing.JFrame {
             }
 
             // Calling the method to update the player
+            boolean isFound = false;
             for (Player player : sportsLeagueSystem.getPlayers()) {
                 if (player.getId() == Integer.parseInt(playerId)) {
+                    isFound = true;
                     int teamIdNum = Integer.parseInt(teamId);
 
                     // Save changes to the sports league system
@@ -1331,12 +1337,15 @@ public class Home extends javax.swing.JFrame {
                             isCaptain, teamIdNum);
                     JOptionPane.showMessageDialog(this, "Player details updated successfully!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Player not found!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Please enter a valid salary.", "Input Error",
+
+            if (!isFound) {
+                JOptionPane.showMessageDialog(this, "Player not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(this, "Error parsing salary.", "Input Error",
                     JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "An error occurred: " + ex.getMessage(), "Error",
@@ -1347,7 +1356,7 @@ public class Home extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton6ActionPerformed
         try {
-            String selectedOption = (String) jComboBox1.getSelectedItem();
+            String selectedOption = jComboBox1.getSelectedItem().toString();
             Team team = sportsLeagueSystem.getTeamByName(selectedOption);
             jTextArea1.setText(team.toString());
             jTextArea1.append("\n\n");
@@ -1357,9 +1366,8 @@ public class Home extends javax.swing.JFrame {
                 jTextArea1.append(player.printableMember());
             }
         } catch (Exception e) {
+            e.printStackTrace();
             jTextArea1.setText("Team not found!");
-        } finally {
-
         }
     }// GEN-LAST:event_jButton6ActionPerformed
 

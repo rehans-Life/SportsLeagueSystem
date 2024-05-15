@@ -143,13 +143,22 @@ public class SportsLeagueSystem {
 
             HashMap<String, Object> hashMap = (HashMap<String, Object>) objectInputStream.readObject();
 
-            ArrayList<Player> newPlayers = (ArrayList<Player>) hashMap.get("players");
-            ArrayList<Team> newTeams = (ArrayList<Team>) hashMap.get("teams");
+            ArrayList<Player> serializedPlayers = (ArrayList<Player>) hashMap.get("players");
+            ArrayList<Team> serializedTeams = (ArrayList<Team>) hashMap.get("teams");
 
-            setTeams(teams);
-            setPlayers(players);
+            int totalManagers = 0;
 
-            Member.setCount(newPlayers.size() + newTeams.size() + 1);
+            for (Team team : serializedTeams) {
+                if (team.getManager() != null) {
+                    totalManagers++;
+                }
+            }
+
+            setTeams(serializedTeams);
+            setPlayers(serializedPlayers);
+
+            Team.setCount(serializedTeams.size() + 1);
+            Member.setCount(serializedPlayers.size() + totalManagers + 1);
 
             objectInputStream.close();
             fileInputStream.close();
@@ -231,7 +240,7 @@ public class SportsLeagueSystem {
     }
 
     public Team getTeamByName(String teamName) throws Exception {
-        for (Team team : teams) {
+        for (Team team : getTeams()) {
             if (team.getName().equalsIgnoreCase(teamName))
                 return team;
         }
