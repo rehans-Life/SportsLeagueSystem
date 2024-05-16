@@ -197,6 +197,8 @@ public class SportsLeagueSystem {
             throw new IllegalArgumentException("Salary cannot be negative");
         }
 
+        // int playerIndex = players.indexOf(player);
+
         player.setName(name);
         player.setAddress(address);
         player.setNationality(nationality);
@@ -233,6 +235,26 @@ public class SportsLeagueSystem {
             stringArray[i] = String.valueOf(intArray[i]);
         }
         return stringArray;
+    }
+
+    public Player getPlayerById(int playerId) {
+
+        for (Player player : players) {
+            if (player.getId() == playerId) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public int getIndexOfPlayerInArr(int playerId) {
+
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getId() == playerId) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     public Team getTeam(int teamId) throws Exception {
