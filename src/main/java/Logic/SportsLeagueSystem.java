@@ -208,6 +208,54 @@ public class SportsLeagueSystem {
         player.setCaptain(isCaptain);
         player.setTeamId(teamId);
     }
+    
+    public int[] getManagerIds(){
+        int [] managerIds = new int [teams.size()];
+        for (int i = 0; i >= teams.size(); i++){
+            for (Team team : teams){
+            int managerId = team.getManager().getId();
+            managerIds[i]= managerId;
+            }
+        }
+        return managerIds;
+    }
+    
+    public String [] getManagerIdString(){
+    int [] managerId = getManagerIds();
+    String[] stringManagerIds = intArrayToStringArray(managerId);
+    return stringManagerIds;
+    }
+    
+    public static String[] intArrayToStringArray(int[] intArray) {
+     if (intArray == null || intArray.length == 0) {
+    return new String[0]; 
+    }
+    String[] stringArray = new String[intArray.length];
+    for (int i = 0; i < intArray.length; i++) {
+    stringArray[i] = String.valueOf(intArray[i]);
+        }
+    return stringArray;
+    }
+    
+    public Player getPlayerById(int playerId){
+        
+        for (Player player : players){
+            if (player.getId() == playerId){
+            return player;
+            }
+        }
+        return null;
+    }
+    
+    public int getIndexOfPlayerInArr(int playerId){
+        
+        for (int i = 0; i < players.size(); i++ ){
+        if (players.get(i).getId() == playerId){
+            return i;
+            }
+        }
+        return -1;
+    }
 
     public Team getTeam(int teamId) throws Exception {
         for (Team team : teams) {
