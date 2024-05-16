@@ -46,6 +46,7 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -531,6 +532,7 @@ public class Home extends javax.swing.JFrame {
 
         jLabel38.setText("Is Captain");
 
+        buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("Yes");
         jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -538,6 +540,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("No");
 
         jLabel39.setText("Team ID");
@@ -1141,7 +1144,7 @@ public class Home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton7ActionPerformed
         try {
             String playerId = jComboBox2.getSelectedItem().toString();
             String name = jTextField1.getText().trim();
@@ -1170,11 +1173,8 @@ public class Home extends javax.swing.JFrame {
                     sportsLeagueSystem.alterMember(player, name, address, nationality, dob, position, salary,
                             isCaptain, teamIdNum);
 
-                    // updatePlayerGUIComponents(player);
-
                     JOptionPane.showMessageDialog(this, "Player details updated successfully!", "Success",
                             JOptionPane.INFORMATION_MESSAGE);
-
                 }
             }
 
@@ -1190,7 +1190,7 @@ public class Home extends javax.swing.JFrame {
                     JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }// GEN-LAST:event_jButton7ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jMenuItem2ActionPerformed
         jTabbedPane1.setSelectedIndex(3);
@@ -1323,19 +1323,6 @@ public class Home extends javax.swing.JFrame {
     private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jRadioButton1ActionPerformed
         // TODO add your handling code here:
     }// GEN-LAST:event_jRadioButton1ActionPerformed
-
-    // private void updatePlayerGUIComponents(Player player) {
-    // jComboBox2.setSelectedItem(String.valueOf(player.getId()));
-    // jTextField1.setText(player.getName());
-    // jTextField2.setText(player.getAddress());
-    // jTextField3.setText(player.getNationality());
-    // jTextField4.setText(player.getDateOfBirth());
-    // jTextField5.setText(player.getPosition());
-    // jTextField6.setText(String.valueOf(player.getYearlySalary()));
-    // jRadioButton1.setSelected(player.isCaptain());
-    // jRadioButton2.setSelected(!player.isCaptain());
-    // jComboBox3.setSelectedItem(String.valueOf(player.getTeamId()));
-    // }
 
     /**
      * @param args the command line arguments

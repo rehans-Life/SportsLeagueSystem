@@ -197,8 +197,6 @@ public class SportsLeagueSystem {
             throw new IllegalArgumentException("Salary cannot be negative");
         }
 
-        // int playerIndex = players.indexOf(player);
-
         player.setName(name);
         player.setAddress(address);
         player.setNationality(nationality);
@@ -209,6 +207,34 @@ public class SportsLeagueSystem {
         player.setTeamId(teamId);
     }
 
+    public int[] getManagerIds() {
+        int[] managerIds = new int[teams.size()];
+        for (int i = 0; i >= teams.size(); i++) {
+            for (Team team : teams) {
+                int managerId = team.getManager().getId();
+                managerIds[i] = managerId;
+            }
+        }
+        return managerIds;
+    }
+
+    public String[] getManagerIdString() {
+        int[] managerId = getManagerIds();
+        String[] stringManagerIds = intArrayToStringArray(managerId);
+        return stringManagerIds;
+    }
+
+    public static String[] intArrayToStringArray(int[] intArray) {
+        if (intArray == null || intArray.length == 0) {
+            return new String[0];
+        }
+        String[] stringArray = new String[intArray.length];
+        for (int i = 0; i < intArray.length; i++) {
+            stringArray[i] = String.valueOf(intArray[i]);
+        }
+        return stringArray;
+    }
+
     public Team getTeam(int teamId) throws Exception {
         for (Team team : teams) {
             if (team.getTeamId() == teamId)
@@ -216,7 +242,7 @@ public class SportsLeagueSystem {
         }
         throw new Exception("Team not found");
     }
-    
+
     public Player getPlayer(int playerId) throws Exception {
         for (Player player : players) {
             if (player.getId() == playerId)
