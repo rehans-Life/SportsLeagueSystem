@@ -1,0 +1,105 @@
+3
+Liverpool
+Anfield
+45522
+Jurgen Klopp
+12 Holland Street, Liverpool
+12/8/1970
+German
+5000000
+5.4
+Level 5 coaching badge
+3
+Mamadou Sakho
+15 Main St., Liverpool
+30/5/1980
+French
+7500000
+Defender
+Not Captain
+Jordan Henderson
+2 Shop St., Liverpool
+24/1/1987
+English
+8500000
+Midfield
+Captain
+Daniel Sturridge
+10 Ailsbury Rd., Liverpool
+6/1/1989
+English
+5500000
+Forward
+Not Captain
+Manchester United
+Old Trafford
+75811
+Jose Mourinho
+15 Rose Street, Manchester
+1/7/1969
+Portuguese
+6000000
+6.2
+Level 3 coaching badge
+2
+Paul Pogba
+22 Main St., Manchester
+11/2/1978
+French
+4000000
+Midfield
+Not Captain
+Wayne Rooney
+15 Shop St., Manchester
+15/5/1981
+English
+7000000
+Forward
+Not Captain
+Manchester City
+The City of Manchester Stadium
+47805
+Pep Guardiola
+6 High Street, Manchester
+2/12/1972
+Spanish
+5500000
+5.2
+Level 2 coaching badge
+3
+Kevin Debruyne
+20 Main St., Manchester City
+2/6/1988
+Belgian
+5500000
+Midfield
+Not captain
+Vincent Kompany
+22 Shop St., Manchester City
+8/1/1986
+Belgian
+6500000
+Defender
+Captain
+David Silva
+10 High St., Manchester City
+17/3/1986
+Spanish
+4500000
+Midfield
+Not captain
+2
+Eden Hazard
+22 Main St., Manchester
+11/2/1978
+Belgian
+4000000
+Midfield
+Not Captain
+Petr Cech
+15 Shop St., Manchester
+15/5/1981
+Czech
+7000000
+Goal Keeper
+Not Captain
