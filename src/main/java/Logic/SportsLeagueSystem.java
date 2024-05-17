@@ -254,9 +254,11 @@ public class SportsLeagueSystem {
         int[] managerIds = new int[teams.size()];
         int i = 0;
         for (Team team : teams) {
-            int managerId = team.getManager().getId();
-            managerIds[i] = managerId;
-            i++;
+            if (team.getManager() != null) {
+                int managerId = team.getManager().getId();
+                managerIds[i] = managerId;
+                i++;
+            }
         }
 
         return managerIds;
