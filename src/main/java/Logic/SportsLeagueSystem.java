@@ -37,6 +37,7 @@ public class SportsLeagueSystem {
     }
 
     boolean createFile(String name) {
+        
         try {
             File file = new File(name);
             file.createNewFile();
@@ -184,6 +185,10 @@ public class SportsLeagueSystem {
     public ArrayList<Team> getTeams() {
         return teams;
     }
+    
+    public void addTeam(Team team) {
+        teams.add(team);
+    }
 
     public void alterMember(Player player, String name, String address, String nationality, String dob,
             String position, double salary, boolean isCaptain, int teamId) throws Exception {
@@ -207,6 +212,57 @@ public class SportsLeagueSystem {
         player.setYearlySalary(salary);
         player.setCaptain(isCaptain);
         player.setTeamId(teamId);
+    }
+    
+    public int[] getManagerIds(){
+        int [] managerIds = new int [teams.size()];
+        int i=0; 
+        for (Team team : teams){
+            if (team.getManager() != null) {
+                int managerId = team.getManager().getId();
+                managerIds[i]= managerId;
+                i++;
+            }
+        }
+       
+        return managerIds;
+    }
+    
+    public String [] getManagerIdString(){
+    int [] managerId = getManagerIds();
+    String[] stringManagerIds = intArrayToStringArray(managerId);
+    return stringManagerIds;
+    }
+    
+    public static String[] intArrayToStringArray(int[] intArray) {
+     if (intArray == null || intArray.length == 0) {
+    return new String[0]; 
+    }
+    String[] stringArray = new String[intArray.length];
+    for (int i = 0; i < intArray.length; i++) {
+    stringArray[i] = String.valueOf(intArray[i]);
+        }
+    return stringArray;
+    }
+    
+    public Player getPlayerById(int playerId){
+        
+        for (Player player : players){
+            if (player.getId() == playerId){
+            return player;
+            }
+        }
+        return null;
+    }
+    
+    public int getIndexOfPlayerInArr(int playerId){
+        
+        for (int i = 0; i < players.size(); i++ ){
+        if (players.get(i).getId() == playerId){
+            return i;
+            }
+        }
+        return -1;
     }
 
     public Team getTeam(int teamId) throws Exception {
