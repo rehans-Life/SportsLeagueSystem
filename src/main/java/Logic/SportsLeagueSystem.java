@@ -313,4 +313,9 @@ public class SportsLeagueSystem {
         }
         throw new Exception("Team not found");
     }
+    
+    public void addPlayer(Player player) {
+        this.players.add(player);
+    }
+ 
 }
