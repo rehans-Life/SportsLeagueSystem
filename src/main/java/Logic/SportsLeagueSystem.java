@@ -9,6 +9,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
@@ -37,7 +40,7 @@ public class SportsLeagueSystem {
     }
 
     boolean createFile(String name) {
-        
+
         try {
             File file = new File(name);
             file.createNewFile();
@@ -185,7 +188,7 @@ public class SportsLeagueSystem {
     public ArrayList<Team> getTeams() {
         return teams;
     }
-    
+
     public void addTeam(Team team) {
         teams.add(team);
     }
@@ -193,16 +196,16 @@ public class SportsLeagueSystem {
     public void alterMember(Player player, String name, String address, String nationality, String dob,
             String position, double salary, boolean isCaptain, int teamId) throws Exception {
 
-        for (Player member : players) {
-            System.out.println(member.getName());
-        }
-        System.out.println("------------");
-
         if (salary < 0) {
             throw new IllegalArgumentException("Salary cannot be negative");
         }
 
-        // int playerIndex = players.indexOf(player);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            LocalDate.parse(dob, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format. Please use the format: dd/MM/yyyy");
+        }
 
         player.setName(name);
         player.setAddress(address);
@@ -213,53 +216,83 @@ public class SportsLeagueSystem {
         player.setCaptain(isCaptain);
         player.setTeamId(teamId);
     }
-    
-    public int[] getManagerIds(){
-        int [] managerIds = new int [teams.size()];
-        int i=0; 
-        for (Team team : teams){
-            if (team.getManager() != null) {
-                int managerId = team.getManager().getId();
-                managerIds[i]= managerId;
-                i++;
-            }
+
+    public void alterMember(Manager manager, String name, String address, String nationality, String dob, double salary,
+            String coachingQualifications, double bonusPercentage, int teamId) throws Exception {
+
+        if (bonusPercentage < 0) {
+            throw new IllegalArgumentException("Bonus Percentage cannot be negative");
         }
-       
-        return managerIds;
-    }
-    
-    public String [] getManagerIdString(){
-    int [] managerId = getManagerIds();
-    String[] stringManagerIds = intArrayToStringArray(managerId);
-    return stringManagerIds;
-    }
-    
-    public static String[] intArrayToStringArray(int[] intArray) {
-     if (intArray == null || intArray.length == 0) {
-    return new String[0]; 
-    }
-    String[] stringArray = new String[intArray.length];
-    for (int i = 0; i < intArray.length; i++) {
-    stringArray[i] = String.valueOf(intArray[i]);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+        try {
+            LocalDate.parse(dob, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Invalid date format. Please use the format: dd/M/yyyy");
         }
-    return stringArray;
+
+        manager.setName(name);
+        manager.setAddress(address);
+        manager.setNationality(nationality);
+        manager.setDateOfBirth(dob);
+        manager.setCoachingQualifications(coachingQualifications);
+        manager.setBonusPercentage(bonusPercentage);
+
     }
-    
-    public Player getPlayerById(int playerId){
-        
-        for (Player player : players){
-            if (player.getId() == playerId){
-            return player;
+
+    public Manager getManagerById(int managerID) {
+        for (Team team : teams) {
+            Manager manager = team.getManager();
+            if (manager.getId() == managerID) {
+                return manager;
             }
         }
         return null;
     }
-    
-    public int getIndexOfPlayerInArr(int playerId){
-        
-        for (int i = 0; i < players.size(); i++ ){
-        if (players.get(i).getId() == playerId){
-            return i;
+
+    public int[] getManagerIds() {
+        int[] managerIds = new int[teams.size()];
+        int i = 0;
+        for (Team team : teams) {
+            int managerId = team.getManager().getId();
+            managerIds[i] = managerId;
+            i++;
+        }
+
+        return managerIds;
+    }
+
+    public String[] getManagerIdString() {
+        int[] managerId = getManagerIds();
+        String[] stringManagerIds = intArrayToStringArray(managerId);
+        return stringManagerIds;
+    }
+
+    public static String[] intArrayToStringArray(int[] intArray) {
+        if (intArray == null || intArray.length == 0) {
+            return new String[0];
+        }
+        String[] stringArray = new String[intArray.length];
+        for (int i = 0; i < intArray.length; i++) {
+            stringArray[i] = String.valueOf(intArray[i]);
+        }
+        return stringArray;
+    }
+
+    public Player getPlayerById(int playerId) {
+        for (Player player : players) {
+            if (player.getId() == playerId) {
+                return player;
+            }
+        }
+        return null;
+    }
+
+    public int getIndexOfPlayerInArr(int playerId) {
+
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getId() == playerId) {
+                return i;
             }
         }
         return -1;
@@ -271,6 +304,15 @@ public class SportsLeagueSystem {
                 return team;
         }
         throw new Exception("Team not found");
+    }
+
+    public int getTeamIDOfMember(int memberId) {
+        for (Team team : teams) {
+            if (team.getManager().getId() == memberId) {
+                return team.getTeamId();
+            }
+        }
+        return -1;
     }
 
     public Player getPlayer(int playerId) throws Exception {
