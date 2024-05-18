@@ -8,6 +8,8 @@ import Logic.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +37,16 @@ public class Home extends javax.swing.JFrame {
         btnAddPlayer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addPlayer();
+            }
+        });
+                
+        btnSaveChanges.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    transferPlayer();
+                } catch (Exception ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                 }
             }
         });
     }
@@ -2151,89 +2163,154 @@ public class Home extends javax.swing.JFrame {
     // jComboBox3.setSelectedItem(String.valueOf(player.getTeamId()));
     //
 
+    /** Name:  addPlayer
+    * @author  Zainab Abdulhusain
+    * Purpose/description: Adding a player to the league
+    * @return  void - never returns a value
+    */
     public void addPlayer() {
+        // validate input fields before proceeding
         if (validateInput()) {
-            // Retrieve values provided by the user
-            String playerName = txtPlayerName.getText();
-            String playerBirthdate = txtPlayerBirthdate.getText();
-            String playerAddress = txtPlayerAddress.getText();
-            String playerNationality = txtPlayerNationality.getText(); // Corrected this line
-            String playerFieldPosition = txtPlayerFieldPosition.getText();
-            String playerYearlySalaryStr = txtPlayerYearlySalary.getText();
-            boolean isCaptain = false;
-            String selectedOption = cmbPlayerTeamID.getSelectedItem().toString();
-            int teamId = Integer.parseInt(selectedOption); // Corrected this line to parse an integer
-
-            if (radCaptainYes.isSelected()) {
-                isCaptain = true;
+        // Retrieve values provided by the user
+        String playerName = txtPlayerName.getText();
+        String playerBirthdate = txtPlayerBirthdate.getText();
+        String playerAddress = txtPlayerAddress.getText();
+        String playerNationality = txtPlayerNationality.getText(); 
+        String playerFieldPosition = txtPlayerFieldPosition.getText();
+        String playerYearlySalaryStr = txtPlayerYearlySalary.getText();
+        boolean isCaptain = radCaptainYes.isSelected();
+        String selectedOption = cmbPlayerTeamID.getSelectedItem().toString();
+        int teamId = Integer.parseInt(selectedOption);
+        
+        // check if player is to be assigned as a captain and if the team already has a captain
+        if (isCaptain && sportsLeagueSystem.teamHasCaptain(teamId)) {
+            // prompt user for confirmation
+            int response = JOptionPane.showConfirmDialog(this, "This team already has a captain. Do you want to assign this player as captain instead?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            
+            // if user confirms, update the current captain's status
+            if (response == JOptionPane.YES_OPTION) {
+                Player currentCaptain = sportsLeagueSystem.getTeamCaptain(teamId);
+                if (currentCaptain != null) {
+                    currentCaptain.setCaptain(false);
+                }
             }
-
-            try {
-                // Convert salary string to double
-                double playerYearlySalary = Double.parseDouble(playerYearlySalaryStr);
-
-                Player player = new Player(playerName, playerBirthdate, playerNationality,
-                        playerYearlySalary, playerAddress, isCaptain, playerFieldPosition,
-                        teamId);
-
-                sportsLeagueSystem.addPlayer(player);
-
-                JOptionPane.showMessageDialog(this, "Player added successfully!", "Success",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(this,
-                        "Invalid salary input. Please enter a valid number.", "Error",
-                        JOptionPane.ERROR_MESSAGE);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "An error occurred: " + ex.getMessage(), "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                ex.printStackTrace();
+            
+            // if user cancels, exit the method
+            else {
+                return;
             }
+            
+        }
+
+        try {
+            // convert salary string to double
+            double playerYearlySalary = Double.parseDouble(playerYearlySalaryStr);
+            
+            // create a new Player object with the provided details
+            Player player = new Player(playerName, playerBirthdate, playerNationality, playerYearlySalary, playerAddress, isCaptain, playerFieldPosition, teamId);
+            
+            // add the new player to the system
+            sportsLeagueSystem.addPlayer(player);
+
+            // notify the user that the player was added successfully
+            JOptionPane.showMessageDialog(this, "Player added successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);    
+        } catch (NumberFormatException ex) {
+            // handle invalid salary input
+            JOptionPane.showMessageDialog(this, "Invalid salary input. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            // handle any other exceptions
+            JOptionPane.showMessageDialog(this, "An error occurred: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
         }
     }
-
-    private boolean validateInput() {
+}
+    
+        /** Name:  validateInput
+        * @author  Zainab Abdulhusain
+        * Purpose/description: validating data entered by the user
+        * @return  true - if all data is acceptable, false otherwise.
+        */
+        private boolean validateInput() {
         try {
+            // retrieve input values from text fields
             String playerName = txtPlayerName.getText();
             String dateOfBirth = txtPlayerBirthdate.getText();
             String address = txtPlayerAddress.getText();
             double yearlySalary = Double.parseDouble(txtPlayerYearlySalary.getText());
             String nationality = txtPlayerNationality.getText();
             String fieldPosition = txtPlayerFieldPosition.getText();
-
-            if (playerName.length() < 3 || playerName.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Player name must contain 3 characters or more");
+                
+                // validate player name
+                if (playerName.length() < 3 || playerName.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Player name must contain 3 characters or more");
+                    return false;
+                } 
+                // validate date of birth
+                else if (dateOfBirth.length() != 10 || dateOfBirth.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,"Invalid date of birth. Correct format: dd/mm/yyyy");
+                    return false;
+                }
+                // validate address
+                else if (address.length() < 20 || address.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,"Invalid address. Address must contain 20 characters or more");
+                    return false;
+                }
+                // validate yearlu salary
+                else if (yearlySalary < 800 || txtPlayerYearlySalary.getText().isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "A player's yearly salary must be 800 or more");
+                    return false;
+                }
+                // validate nationality
+                else if (nationality.length() < 5 || nationality.isEmpty()) {
+                    JOptionPane.showMessageDialog(null,"A player's nationality must contain 5 letters or more");
+                    return false;
+                }
+                // validate field position
+                else if (fieldPosition.length() > 20 || fieldPosition.length() < 3) {
+                    JOptionPane.showMessageDialog(null, "Invalid field position");
+                    return false;
+                }
+                // validate captain selection - one of the radio buttons must be selected
+                else if (addPlayerGroup.getSelection() == null) {
+                    JOptionPane.showMessageDialog(null,"Please select whether the player is a captain or not");
                 return false;
-            } else if (dateOfBirth.length() != 10 || dateOfBirth.isEmpty()) {
-                JOptionPane.showMessageDialog(null,
-                        "Invalid date of birth. Correct format: dd/mm/yyyy");
-                return false;
-            } else if (address.length() < 20 || address.isEmpty()) {
-                JOptionPane.showMessageDialog(null,
-                        "Invalid address. Address must contain 20 characters or more");
-                return false;
-            } else if (yearlySalary < 800 || txtPlayerYearlySalary.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(null, "A player's yearly salary must be 800 or more");
-                return false;
-            } else if (nationality.length() < 5 || nationality.isEmpty()) {
-                JOptionPane.showMessageDialog(null,
-                        "A player's nationality must contain 5 letters or more");
-                return false;
-            } else if (fieldPosition.length() > 20 || fieldPosition.length() < 3) {
-                JOptionPane.showMessageDialog(null, "Invalid field position");
-                return false;
-            } else if (addPlayerGroup.getSelection() == null) {
-                JOptionPane.showMessageDialog(null,
-                        "Please select whether the player is a captain or not");
-                return false;
-            }
-
-            return true;
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Invalid salary input. Please enter a valid number.");
-            return false;
+                }
+                
+                // return true if all validations are passed
+                return true;
+                } catch (NumberFormatException ex) {
+                        // handle invalid salary input
+                        JOptionPane.showMessageDialog(null, "Invalid salary input. Please enter a valid number.");
+                        return false;
+                }
         }
-    }
+        
+        /** Name:  transferPlayer
+        * @author  Zainab Abdulhusain
+        * Purpose/description: assigning or transferring a player to a new team
+        * @return  void - never returns a value
+        */
+        public void transferPlayer() throws Exception {
+        // get the selected player ID from the combo box and convert it to an integer
+        String selectedPlayer = cmbAssignPlayerID.getSelectedItem().toString();
+        int playerId = Integer.parseInt(selectedPlayer);
+        
+        // get the selected team ID from the combo box and convert it to an integer
+        String selectedTeam = cmbAssignTeamID.getSelectedItem().toString();
+        int newTeamId = Integer.parseInt(selectedTeam);
+        
+        // confirm the transfer action from the user
+        int response = JOptionPane.showConfirmDialog(null, "Are you sure you want to transfer Player ID " + playerId + " to Team ID " + newTeamId + "?", "Confirm Transfer", 
+            JOptionPane.YES_NO_OPTION);
+        
+        // if the user confirms the transfer, call the method to transfer the player to a new team
+        if (response == JOptionPane.YES_OPTION) {
+            sportsLeagueSystem.transferPlayer(playerId, newTeamId);
+            
+            // notify the user that the transfer was successful
+            JOptionPane.showMessageDialog(null, "Player was transfered successfully");
+        }
+    }   
 
     /**
      * @param args the command line arguments
