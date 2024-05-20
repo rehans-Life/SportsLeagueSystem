@@ -239,6 +239,20 @@ public class SportsLeagueSystem {
         manager.setBonusPercentage(bonusPercentage);
 
     }
+    
+    public Player getPlayerObj(int id){
+        
+        for (Player player : players){
+            if (player.getId() == id){
+            return player;
+            }
+        }
+        return null;
+    }
+    
+    public void deleteTeam(Team team){
+    teams.remove(team);
+    }
 
     public Manager getManagerById(int managerID) {
         for (Team team : teams) {
@@ -335,6 +349,7 @@ public class SportsLeagueSystem {
 
         return teamNames;
     }
+    
 
     public String[] getTeamIDs() {
         int teamsSize = teams.size();
@@ -356,6 +371,28 @@ public class SportsLeagueSystem {
         }
 
         return playerId;
+    }
+    
+     public String[] getManagerIdss() {
+        int numOfManager = teams.size();
+
+        String[] ManagerIds = new String[numOfManager];
+        for (int i = 0; i < numOfManager; i++) {
+            ManagerIds[i] = String.valueOf(teams.get(i).getManager().getId());
+        }
+
+        return ManagerIds;
+    }
+    
+    public Manager getManagerObj (int managerId){
+        
+        for (Team team : teams){
+            if (team.getManager().getId() == managerId){
+                Manager manager = team.getManager();
+                return manager;
+            }
+        }
+        return null;
     }
 
     public Team getTeamByName(String teamName) throws Exception {
