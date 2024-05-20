@@ -6,7 +6,7 @@ package Logic;
 
 import java.util.*;
 import java.io.*;
-
+import java.util.ArrayList;
 /**
  *
  * @author Rehan
@@ -17,6 +17,7 @@ public class Team implements Serializable {
     private String stadiumName;
     private int stadiumCapacity;
     private Manager manager;
+    
 
     static int count = 0;
 
@@ -88,5 +89,6 @@ public class Team implements Serializable {
     @Override
     public String toString() {
         return getName();
-    }   
+    }
+
 }
