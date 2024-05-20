@@ -1254,17 +1254,20 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(stadiumLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel62, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(stadiumLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(stadiumLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(stadiumLabelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel63, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(stadiumLabelLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(stadiumLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(stadiumLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnAddPlayer1)
-                .addGap(0, 82, Short.MAX_VALUE))
+                .addGap(0, 76, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -1769,7 +1772,34 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddPlayer1ActionPerformed
 
     private void teamIDchooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamIDchooseActionPerformed
-        // TODO add your handling code here:
+    /**
+     * method name alterTeam
+     * @jenan
+     * method purpose: to alter the team 
+    **/
+        try {
+        String selectedTeamId = (String) teamIDchoose.getSelectedItem();
+        int teamId = Integer.parseInt(selectedTeamId);
+        String newName = txtTeamName.getText();
+        String newStadiumName = txtStadium.getText();
+        int newStadiumCapacity = Integer.parseInt(txtStadiumCap.getText());
+        boolean teamExists = false;
+
+        for (Team t : sportsLeagueSystem.getTeams()) {
+            if (t.getTeamId() == teamId) {
+                t.alterTeam(teamId, newName, newStadiumName, newStadiumCapacity);
+                teamExists = true;
+                break;
+            }
+        }
+        if (teamExists) {
+            JOptionPane.showMessageDialog(this, "Team has been altered successfully!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Team not found. Please select a valid team ID.");
+          }
+        }catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid number for the team ID and stadium capacity.");
+        }
     }//GEN-LAST:event_teamIDchooseActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton8ActionPerformed

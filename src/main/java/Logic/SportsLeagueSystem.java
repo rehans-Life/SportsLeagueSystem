@@ -493,16 +493,5 @@ public class SportsLeagueSystem {
         players.remove(player); // remove the player object from the players ArrayList
     }
     
-    /**
-     * method name displayTeamPlayers
-     * @jenan
-     * Print the list of team players
-    **/ 
-    public void displayTeamPlayers(){
-    
-        System.out.println("Players in the team:");
-        for (int i = 0; i < players.size(); i++) {
-            System.out.println(players.get(i));
-        }
-    }
+
 }
