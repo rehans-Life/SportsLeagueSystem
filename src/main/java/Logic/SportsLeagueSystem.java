@@ -238,9 +238,35 @@ public class SportsLeagueSystem {
         manager.setCoachingQualifications(coachingQualifications);
         manager.setBonusPercentage(bonusPercentage);
 
+        // Find the current team of the manager
+        Team currentTeam = null;
+        for (Team team : teams) {
+            if (team.getManager() != null && team.getManager().getId() == manager.getId()) {
+                currentTeam = team;
+                break;
+            }
+        }
+
+        // Find the new team by teamId
+        Team newTeam = null;
+        for (Team team : teams) {
+            if (team.getTeamId() == teamId) {
+                newTeam = team;
+                break;
+            }
+        }
+
+        // Update the teams' manager references
+        if (currentTeam != null && currentTeam != newTeam) {
+            currentTeam.setManager(null); // Remove the manager from the current team
+        }
+        if (newTeam != null) {
+            newTeam.setManager(manager); // Set the manager for the new team
+        }
+
     }
-    
-    public void deleteTeam(Team team){
+
+    public void deleteTeam(Team team) {
         teams.remove(team);
     }
 
@@ -256,7 +282,7 @@ public class SportsLeagueSystem {
 
     public int[] getManagerIds() {
         ArrayList<Integer> managerIds = new ArrayList<>();
-        
+
         for (Team team : teams) {
             Manager manager = team.getManager();
             if (manager != null) {
@@ -264,13 +290,13 @@ public class SportsLeagueSystem {
                 managerIds.add(managerId);
             }
         }
-        
+
         int[] idsArray = new int[managerIds.size()];
-        
-        for (int i = 0; i <  managerIds.size(); i++) {
+
+        for (int i = 0; i < managerIds.size(); i++) {
             idsArray[i] = managerIds.get(i);
         }
-        
+
         return idsArray;
     }
 
@@ -345,7 +371,6 @@ public class SportsLeagueSystem {
 
         return teamNames;
     }
-    
 
     public String[] getTeamIDs() {
         int teamsSize = teams.size();
@@ -376,98 +401,108 @@ public class SportsLeagueSystem {
         }
         throw new Exception("Team not found");
     }
-    
-    /** Name:  addPlayer
-    * @author  Zainab Abdulhusain
-    * Purpose/description: Adding a player to the system
-    * @param   player - the player object to be added to the league
-    * @return  void - never returns a value
-    */
+
+    /**
+     * Name: addPlayer
+     * 
+     * @author Zainab Abdulhusain
+     *         Purpose/description: Adding a player to the system
+     * @param player - the player object to be added to the league
+     * @return void - never returns a value
+     */
     public void addPlayer(Player player) {
         // add the player to the players ArrayList
-        this.players.add(player); 
+        this.players.add(player);
     }
-    
-    /** Name:  teamHasCaptain
-    * @author  Zainab Abdulhusain
-    * Purpose/description: to find out whether the team has a captain or not
-    * @param   teamId - the team ID of the team that the player belongs to
-    * @return  true - if the team has a captain, false otherwise.
-    */
+
+    /**
+     * Name: teamHasCaptain
+     * 
+     * @author Zainab Abdulhusain
+     *         Purpose/description: to find out whether the team has a captain or
+     *         not
+     * @param teamId - the team ID of the team that the player belongs to
+     * @return true - if the team has a captain, false otherwise.
+     */
     public boolean teamHasCaptain(int teamId) {
         for (Player player : players) { // loop through the players ArrayList
-            // return true if the players team id is equal to the provided team id, 
+            // return true if the players team id is equal to the provided team id,
             // and if the player is a captain
-            if(player.getTeamId()==teamId && player.isCaptain()) {
+            if (player.getTeamId() == teamId && player.isCaptain()) {
                 return true;
             }
         }
         return false;
     }
-    
-    /** Name:  getTeamCaptain
-    * @author  Zainab Abdulhusain
-    * Purpose/description: finding the team captain object
-    * @param   teamId - the id of the team that the captain belongs to
-    * @return  Player - the captain's object, null otherwise.
-    */
+
+    /**
+     * Name: getTeamCaptain
+     * 
+     * @author Zainab Abdulhusain
+     *         Purpose/description: finding the team captain object
+     * @param teamId - the id of the team that the captain belongs to
+     * @return Player - the captain's object, null otherwise.
+     */
     public Player getTeamCaptain(int teamId) {
         for (Player player : players) { // loop through the players ArrayList
-            // return the player object if the current player's team id matches 
+            // return the player object if the current player's team id matches
             // the provided team id and if the player is a captain
-            if(player.getTeamId()==teamId && player.isCaptain()) {
+            if (player.getTeamId() == teamId && player.isCaptain()) {
                 return player;
             }
         }
         return null;
     }
-    
-    /** Name:  transferPlayer
-    * @author  Zainab Abdulhusain
-    * Purpose/description: transferring or assigning the player to a new team
-    * @param   playerID - the id of the player to be transferred
-    * @param   newTeamID - the id of the team that the player is getting 
-    * assigned/transferred to
-    * @return  void - never returns a value
-    */
+
+    /**
+     * Name: transferPlayer
+     * 
+     * @author Zainab Abdulhusain
+     *         Purpose/description: transferring or assigning the player to a new
+     *         team
+     * @param playerID  - the id of the player to be transferred
+     * @param newTeamID - the id of the team that the player is getting
+     *                  assigned/transferred to
+     * @return void - never returns a value
+     */
     public void transferPlayer(int playerID, int newTeamID) throws Exception {
         // retrieve the player object using the player id
         Player player = getPlayer(playerID);
-        
+
         // retrieve the new team object using the new team id
         Team newTeam = getTeam(newTeamID);
-        
+
         // get the old team id from the player object
         int oldTeamID = player.getTeamId();
-        
+
         // retrieve the old team object using the old team id
         Team oldTeam = getTeam(oldTeamID);
-        
-        // if the player is currently assigned to a team, remove the player 
+
+        // if the player is currently assigned to a team, remove the player
         // from their old team
-       if(oldTeam != null) {
-           removePlayer(player);
-       }
-       
-       // add the player to the new team
-       addPlayer(player);
-       
-       // update the player's team id to the new team id
-       player.setTeamId(newTeamID);
-       
+        if (oldTeam != null) {
+            removePlayer(player);
+        }
+
+        // add the player to the new team
+        addPlayer(player);
+
+        // update the player's team id to the new team id
+        player.setTeamId(newTeamID);
+
     }
-    
+
     public void removeMember(int memberId) {
-        
+
         for (Team team : teams) {
             Manager manager = team.getManager();
-            
+
             if (manager != null && manager.getId() == memberId) {
                 team.removeManager();
                 return;
             }
         }
-        
+
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getId() == memberId) {
                 players.remove(i);
@@ -475,16 +510,17 @@ public class SportsLeagueSystem {
             }
         }
     }
-    
-    /** Name:  removePlayer
-    * @author  Zainab Abdulhusain
-    * Purpose/description: removing a player from the players list
-    * @param   player - the object of the player to be removed
-    * @return  void - never returns a value
-    */
+
+    /**
+     * Name: removePlayer
+     * 
+     * @author Zainab Abdulhusain
+     *         Purpose/description: removing a player from the players list
+     * @param player - the object of the player to be removed
+     * @return void - never returns a value
+     */
     public void removePlayer(Player player) {
         players.remove(player); // remove the player object from the players ArrayList
     }
-    
 
 }
