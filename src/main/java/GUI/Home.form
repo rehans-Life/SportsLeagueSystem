@@ -1864,7 +1864,7 @@
                                   <Component id="jLabel64" min="-2" pref="97" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="btnAddPlayer1" min="-2" pref="118" max="-2" attributes="0"/>
+                                      <Component id="btnAlterTeam" min="-2" pref="118" max="-2" attributes="0"/>
                                       <Component id="jScrollPane12" min="-2" pref="156" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -1906,7 +1906,7 @@
                               <Component id="jLabel64" min="-2" pref="16" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnAddPlayer1" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnAlterTeam" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="76" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -1936,20 +1936,15 @@
                 </Component>
                 <Component class="javax.swing.JComboBox" name="teamIDchoose">
                   <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                      <StringArray count="4">
-                        <StringItem index="0" value="Item 1"/>
-                        <StringItem index="1" value="Item 2"/>
-                        <StringItem index="2" value="Item 3"/>
-                        <StringItem index="3" value="Item 4"/>
-                      </StringArray>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;String&gt;(sportsLeagueSystem.getTeamIDs())" type="code"/>
                     </Property>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teamIDchooseActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(sportsLeagueSystem.getManagerIdString())"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox(sportsLeagueSystem.getTeams().toArray())"/>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>
@@ -2001,7 +1996,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="btnAddPlayer1">
+                <Component class="javax.swing.JButton" name="btnAlterTeam">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="0" green="66" red="ff" type="rgb"/>
@@ -2012,7 +2007,7 @@
                     <Property name="text" type="java.lang.String" value="Alter Team"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddPlayer1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAlterTeamActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
