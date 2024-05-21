@@ -7,7 +7,11 @@ package GUI;
 import Logic.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -49,8 +53,36 @@ public class Home extends javax.swing.JFrame {
                  }
             }
         });
+        
+               
+        // jjjj
+        teamIDchoose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                displayTeamInfo();
+            }
+        });
+        
+        // jjjj
+        btnAlterTeam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                alterTeam();
+            }
+        });
+        
+        // jjjj
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                try {
+                    produceSalaryReport();
+                } catch (IOException ex) {
+                    Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
     }
-
+    
+    
+    
     public SportsLeagueSystem getSportsLeagueSystem() {
         return sportsLeagueSystem;
     }
@@ -199,7 +231,7 @@ public class Home extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         teamIdLabel = new javax.swing.JLabel();
-        teamIDchoose = new javax.swing.JComboBox(sportsLeagueSystem.getManagerIdString());
+        teamIDchoose = new javax.swing.JComboBox(sportsLeagueSystem.getTeams().toArray());
         jLabel62 = new javax.swing.JLabel();
         jScrollPane10 = new javax.swing.JScrollPane();
         txtStadium = new javax.swing.JTextPane();
@@ -209,7 +241,7 @@ public class Home extends javax.swing.JFrame {
         jLabel64 = new javax.swing.JLabel();
         jScrollPane12 = new javax.swing.JScrollPane();
         txtStadiumCap = new javax.swing.JTextPane();
-        btnAddPlayer1 = new javax.swing.JButton();
+        btnAlterTeam = new javax.swing.JButton();
         jPanel14 = new javax.swing.JPanel();
         jPanel15 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
@@ -1161,7 +1193,7 @@ public class Home extends javax.swing.JFrame {
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 459, Short.MAX_VALUE)
+            .addComponent(jPanel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("tab9", jPanel10);
@@ -1176,7 +1208,7 @@ public class Home extends javax.swing.JFrame {
 
         teamIdLabel.setText("Team ID:");
 
-        teamIDchoose.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        teamIDchoose.setModel(new javax.swing.DefaultComboBoxModel<String>(sportsLeagueSystem.getTeamIDs()));
         teamIDchoose.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 teamIDchooseActionPerformed(evt);
@@ -1195,12 +1227,12 @@ public class Home extends javax.swing.JFrame {
 
         jScrollPane12.setViewportView(txtStadiumCap);
 
-        btnAddPlayer1.setBackground(new java.awt.Color(255, 102, 0));
-        btnAddPlayer1.setForeground(new java.awt.Color(255, 255, 255));
-        btnAddPlayer1.setText("Alter Team");
-        btnAddPlayer1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterTeam.setBackground(new java.awt.Color(255, 102, 0));
+        btnAlterTeam.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterTeam.setText("Alter Team");
+        btnAlterTeam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddPlayer1ActionPerformed(evt);
+                btnAlterTeamActionPerformed(evt);
             }
         });
 
@@ -1235,7 +1267,7 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(stadiumLabelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddPlayer1, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAlterTeam, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(283, 283, 283))
         );
@@ -1266,7 +1298,7 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel64, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnAddPlayer1)
+                .addComponent(btnAlterTeam)
                 .addGap(0, 76, Short.MAX_VALUE))
         );
 
@@ -1767,9 +1799,9 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbAssignTeamID1ActionPerformed
 
-    private void btnAddPlayer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPlayer1ActionPerformed
+    private void btnAlterTeamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterTeamActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnAddPlayer1ActionPerformed
+    }//GEN-LAST:event_btnAlterTeamActionPerformed
 
     private void teamIDchooseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teamIDchooseActionPerformed
     /**
@@ -2301,7 +2333,100 @@ public class Home extends javax.swing.JFrame {
             // notify the user that the transfer was successful
             JOptionPane.showMessageDialog(null, "Player was transfered successfully");
         }
-    }   
+    }
+        
+    /**
+     * method name displayTeamInfo
+     * @jenan
+     * method purpose: to display the team info
+    **/
+        public void displayTeamInfo() {
+        try {
+            int teamId = Integer.parseInt((String) teamIDchoose.getSelectedItem());
+            for (int i = 0; i < sportsLeagueSystem.getTeams().size(); i++) {
+            if(sportsLeagueSystem.getTeams().get(i).getTeamId()==teamId) {
+            Team team = sportsLeagueSystem.getTeams().get(i);
+            txtTeamName.setText(team.getName());
+            txtStadium.setText(team.getStadiumName());
+            String capacity = String.valueOf(team.getStadiumCapacity());
+            txtStadiumCap.setText(capacity);
+            
+            }
+        }
+           
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Error loading player data: " + ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }    
+        }
+
+     /**
+     * method name alterTeam
+     * @jenan
+     * method purpose: to alter the team 
+     **/
+        public void alterTeam() {
+        try {
+        String selectedTeamID = teamIDchoose.getSelectedItem().toString();
+        int teamId = Integer.parseInt(selectedTeamID);
+        String newName = txtTeamName.getText();
+        String newStadiumName = txtStadium.getText();
+        int newStadiumCapacity = Integer.parseInt(txtStadiumCap.getText());
+        
+        for (int i = 0; i < sportsLeagueSystem.getTeams().size(); i++) {
+            if(sportsLeagueSystem.getTeams().get(i).getTeamId()==teamId) {
+            Team team = sportsLeagueSystem.getTeams().get(i);
+            team.setName(newName);
+            team.setStadiumName(newStadiumName);
+            team.setStadiumCapacity(newStadiumCapacity);
+            
+            JOptionPane.showMessageDialog(this, "Team altered successfully");
+            }
+        }
+                
+        }catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "Please enter a valid number for the team ID and stadium capacity.");
+        }
+        }
+        
+        public void produceSalaryReport() throws IOException {
+        String path = JOptionPane.showInputDialog(null, "Enter the path to save the payroll report:");
+        
+        if(path==null || path.isEmpty()) {
+            JOptionPane.showInputDialog(null, "Invalid path. Report generation canceled.");
+            return;
+        }
+        
+        ArrayList<Team> teams = sportsLeagueSystem.getTeams();
+        ArrayList<Player> players = sportsLeagueSystem.getPlayers();
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(path+"/payroll.txt"))) {
+            double leagueTotal = 0.0;
+            
+            for (Team team:teams) {
+                writer.write("Team: "+team.getName()+"\n");
+                double teamTotal = 0.0;
+                
+                for(Player player:players) {
+                    if(player.getTeamId()==team.getTeamId()) {
+                        double twoWeeksPay = player.getYearlySalary()/26;
+                        writer.write("Player: "+player.getName()+", ID: "+player.getId()+", Two Weeks Pay: $"+String.format("%.2f", twoWeeksPay)+ "\n");
+                        teamTotal += twoWeeksPay;
+                    }
+                }
+                
+                writer.write("Team Total: $"+String.format("%.2f", teamTotal)+"\n\n");
+                leagueTotal += teamTotal;
+                }
+            
+            writer.write("League Total: $" + String.format("%.2f", leagueTotal) + "\n");
+            JOptionPane.showMessageDialog(null, "Payroll report generated successfully at: " + path + "/payroll.txt");
+           
+        } catch (IOException e) {
+        JOptionPane.showMessageDialog(null, "Error writing the payroll report: " + e.getMessage());
+        e.printStackTrace();
+    }
+        }
 
     /**
      * @param args the command line arguments
@@ -2350,7 +2475,7 @@ public class Home extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup addPlayerGroup;
     private javax.swing.JButton btnAddPlayer;
-    private javax.swing.JButton btnAddPlayer1;
+    private javax.swing.JButton btnAlterTeam;
     private javax.swing.JButton btnSaveChanges;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox<String> cmbAssignPlayerID;

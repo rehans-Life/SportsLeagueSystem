@@ -93,19 +93,5 @@ public class Team implements Serializable {
     public String toString() {
         return getName();
     }
-    
-    /**
-     * method name alterTeam
-     * @jenan
-     * method purpose: to alter the team 
-    **/
-    public void alterTeam(int teamId, String newName, String newStadiumName, int newStadiumCapacity) {
-        if (this.teamId == teamId) {
-        setName(newName);
-        setStadiumName(newStadiumName);
-        setStadiumCapacity(newStadiumCapacity);
-        }else{
-            System.out.println("Team not found");
-        }
-    }
+
 }
