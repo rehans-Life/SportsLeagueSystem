@@ -1935,27 +1935,36 @@ public class Home extends javax.swing.JFrame {
         // TODO add your handling code here:
     }// GEN-LAST:event_jButton11ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-        String selectedOption = jComboBox9.getSelectedItem().toString();
-        Integer id = Integer.valueOf(selectedOption);
-        Player player = sportsLeagueSystem.getPlayerObj(id);
-        sportsLeagueSystem.getPlayers().remove(player);
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            String selectedOption = jComboBox9.getSelectedItem().toString();
+            int id = Integer.valueOf(selectedOption);
 
-        jComboBox9.setModel(new DefaultComboBoxModel(sportsLeagueSystem.getManagerIdss()));
-        // Player player = sportsLeagueSystem.getPlayerById(playerIdToString);
-        // Integer sad = sportsLeagueSystem.players.indexOf();
+            Player player = sportsLeagueSystem.getPlayer(id);
+            sportsLeagueSystem.removeMember(player.getId());            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        } 
+
+        jComboBox9.setModel(new DefaultComboBoxModel(sportsLeagueSystem.getPlayerIDs()));
     }// GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton13ActionPerformed
         // TODO add your handling code here:
         String selectedOption = jComboBox7.getSelectedItem().toString();
         Integer managerId = Integer.valueOf(selectedOption);
-        Manager manager = sportsLeagueSystem.getManagerObj(managerId);
-        sportsLeagueSystem.getTeams().remove(manager);
+        
+        Manager manager = sportsLeagueSystem.getManagerById(managerId);
+        
+        if (manager == null) {
+            JOptionPane.showMessageDialog(null, "Manager not found!", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        sportsLeagueSystem.removeMember(manager.getId());
         jComboBox7.setModel(new DefaultComboBoxModel(sportsLeagueSystem.getManagerIdString()));
-
-        // sportsLeagueSystem.getT
     }// GEN-LAST:event_jButton13ActionPerformed
 
     private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jComboBox7ActionPerformed
@@ -2006,6 +2015,8 @@ public class Home extends javax.swing.JFrame {
             jTextArea1.append("\n\n");
             if (team.getManager() != null) {
                 jTextArea1.append("Manager:" + team.getManager().printableMember());
+            } else {
+                jTextArea1.append("Manager: This team does not have a manager\n");
             }
 
             for (Player player : sportsLeagueSystem.getPlayersFromTeam(team.getTeamId())) {

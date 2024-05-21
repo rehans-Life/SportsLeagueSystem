@@ -240,24 +240,14 @@ public class SportsLeagueSystem {
 
     }
     
-    public Player getPlayerObj(int id){
-        
-        for (Player player : players){
-            if (player.getId() == id){
-            return player;
-            }
-        }
-        return null;
-    }
-    
     public void deleteTeam(Team team){
-    teams.remove(team);
+        teams.remove(team);
     }
 
     public Manager getManagerById(int managerID) {
         for (Team team : teams) {
             Manager manager = team.getManager();
-            if (manager.getId() == managerID) {
+            if (manager != null && manager.getId() == managerID) {
                 return manager;
             }
         }
@@ -265,17 +255,23 @@ public class SportsLeagueSystem {
     }
 
     public int[] getManagerIds() {
-        int[] managerIds = new int[teams.size()];
-        int i = 0;
+        ArrayList<Integer> managerIds = new ArrayList<>();
+        
         for (Team team : teams) {
-            if (team.getManager() != null) {
-                int managerId = team.getManager().getId();
-                managerIds[i] = managerId;
-                i++;
+            Manager manager = team.getManager();
+            if (manager != null) {
+                int managerId = manager.getId();
+                managerIds.add(managerId);
             }
         }
-
-        return managerIds;
+        
+        int[] idsArray = new int[managerIds.size()];
+        
+        for (int i = 0; i <  managerIds.size(); i++) {
+            idsArray[i] = managerIds.get(i);
+        }
+        
+        return idsArray;
     }
 
     public String[] getManagerIdString() {
@@ -372,28 +368,6 @@ public class SportsLeagueSystem {
 
         return playerId;
     }
-    
-     public String[] getManagerIdss() {
-        int numOfManager = teams.size();
-
-        String[] ManagerIds = new String[numOfManager];
-        for (int i = 0; i < numOfManager; i++) {
-            ManagerIds[i] = String.valueOf(teams.get(i).getManager().getId());
-        }
-
-        return ManagerIds;
-    }
-    
-    public Manager getManagerObj (int managerId){
-        
-        for (Team team : teams){
-            if (team.getManager().getId() == managerId){
-                Manager manager = team.getManager();
-                return manager;
-            }
-        }
-        return null;
-    }
 
     public Team getTeamByName(String teamName) throws Exception {
         for (Team team : getTeams()) {
@@ -481,6 +455,25 @@ public class SportsLeagueSystem {
        // update the player's team id to the new team id
        player.setTeamId(newTeamID);
        
+    }
+    
+    public void removeMember(int memberId) {
+        
+        for (Team team : teams) {
+            Manager manager = team.getManager();
+            
+            if (manager != null && manager.getId() == memberId) {
+                team.removeManager();
+                return;
+            }
+        }
+        
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getId() == memberId) {
+                players.remove(i);
+                return;
+            }
+        }
     }
     
     /** Name:  removePlayer

@@ -6,7 +6,6 @@ package Logic;
 
 import java.util.*;
 import java.io.*;
-import java.util.ArrayList;
 /**
  *
  * @author Rehan
@@ -76,6 +75,10 @@ public class Team implements Serializable {
 
     public int getStadiumCapacity() {
         return stadiumCapacity;
+    }
+    
+    public void removeManager() {
+        this.manager = null;
     }
 
     public static int getCount() {
