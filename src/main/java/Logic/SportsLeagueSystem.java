@@ -257,13 +257,11 @@ public class SportsLeagueSystem {
         }
 
         // Update the teams' manager references
-        if (currentTeam != null && currentTeam != newTeam) {
-            currentTeam.setManager(null); // Remove the manager from the current team
-        }
-        if (newTeam != null) {
+        if (currentTeam != null && currentTeam != newTeam && newTeam != null) {
+            Manager tempManager = newTeam.getManager(); // Store the new team's manager
             newTeam.setManager(manager); // Set the manager for the new team
+            currentTeam.setManager(tempManager); // Set the manager for the current team
         }
-
     }
 
     public void deleteTeam(Team team) {
