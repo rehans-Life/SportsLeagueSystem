@@ -193,6 +193,23 @@ public class SportsLeagueSystem {
         teams.add(team);
     }
 
+    /**
+     * Name: alterMember
+     * 
+     * @author Hussain Almakana
+     *         Purpose/description: Alters the details of a player.
+     * @param player      - the player object whose details are to be altered.
+     * @param name        - the new name of the player.
+     * @param address     - the new address of the player.
+     * @param nationality - the new nationality of the player.
+     * @param dob         - the new date of birth of the player in the format
+     *                    dd/MM/yyyy.
+     * @param position    - the new position of the player.
+     * @param salary      - the new yearly salary of the player.
+     * @param isCaptain   - boolean indicating if the player is the captain.
+     * @param teamId      - the ID of the new team the player belongs to.
+     * @throws Exception - if the salary is negative or the date format is invalid.
+     */
     public void alterMember(Player player, String name, String address, String nationality, String dob,
             String position, double salary, boolean isCaptain, int teamId) throws Exception {
 
@@ -217,6 +234,27 @@ public class SportsLeagueSystem {
         player.setTeamId(teamId);
     }
 
+    /**
+     * Name: alterMember
+     * 
+     * @author Hussain Almakana
+     *         Purpose/description: Alters the details of a manager and updates team
+     *         assignments.
+     * @param manager                - the manager object whose details are to be
+     *                               altered.
+     * @param name                   - the new name of the manager.
+     * @param address                - the new address of the manager.
+     * @param nationality            - the new nationality of the manager.
+     * @param dob                    - the new date of birth of the manager in the
+     *                               format dd/M/yyyy.
+     * @param salary                 - the new salary of the manager.
+     * @param coachingQualifications - the new coaching qualifications of the
+     *                               manager.
+     * @param bonusPercentage        - the new bonus percentage of the manager.
+     * @param teamId                 - the ID of the new team the player belongs to.
+     * @throws Exception - if the bonus percentage is negative or the date format is
+     *                   invalid.
+     */
     public void alterMember(Manager manager, String name, String address, String nationality, String dob, double salary,
             String coachingQualifications, double bonusPercentage, int teamId) throws Exception {
 
@@ -262,6 +300,13 @@ public class SportsLeagueSystem {
             newTeam.setManager(manager); // Set the manager for the new team
             currentTeam.setManager(tempManager); // Set the manager for the current team
         }
+    }
+
+    public void alterTeam(int teamId, String teamName, String stadiumName, int stadiumCapacity) throws Exception {
+        Team team = getTeam(teamId);
+        team.setName(teamName);
+        team.setStadiumName(stadiumName);
+        team.setStadiumCapacity(stadiumCapacity);
     }
 
     public void deleteTeam(Team team) {
