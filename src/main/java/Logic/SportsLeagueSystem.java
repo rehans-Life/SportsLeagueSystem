@@ -302,11 +302,29 @@ public class SportsLeagueSystem {
         }
     }
 
+    /**
+     * Name: alterTeam
+     * 
+     * @author Jenan
+     *         Purpose/description: Alters the details of a team in the sports
+     *         league system.
+     *
+     * @param teamId          The ID of the team to alter.
+     * @param teamName        The new name for the team.
+     * @param stadiumName     The new name for the team's stadium.
+     * @param stadiumCapacity The new capacity for the team's stadium.
+     * @throws Exception If an error occurs while altering the team.
+     * 
+     */
     public void alterTeam(int teamId, String teamName, String stadiumName, int stadiumCapacity) throws Exception {
-        Team team = getTeam(teamId);
-        team.setName(teamName);
-        team.setStadiumName(stadiumName);
-        team.setStadiumCapacity(stadiumCapacity);
+        try {
+            Team team = getTeam(teamId);
+            team.setName(teamName);
+            team.setStadiumName(stadiumName);
+            team.setStadiumCapacity(stadiumCapacity);
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public void deleteTeam(Team team) {
