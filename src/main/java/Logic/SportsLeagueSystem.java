@@ -265,6 +265,11 @@ public class SportsLeagueSystem {
         }
 
     }
+    
+    public void addManager(Manager manager, int teamId) throws Exception {
+        Team team = getTeam(teamId);
+        team.setManager(manager);
+    }
 
     public void deleteTeam(Team team) {
         teams.remove(team);
