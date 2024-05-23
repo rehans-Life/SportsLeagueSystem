@@ -45,7 +45,7 @@ public class SportsLeagueSystem {
      * @author Rehan Tosif 
      * Purpose: creating a file with the given name if it doesn't exists.
      * @param name - the name of the file to be created
-     * @return boolean - true/false indicating wheather the
+     * @return bool - true/false indicating whether the
      *                   file was deleted or not            
      */
     boolean createFile(String name) {
@@ -252,11 +252,11 @@ public class SportsLeagueSystem {
             throw new IllegalArgumentException("Salary cannot be negative");
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
             LocalDate.parse(dob, formatter);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid date format. Please use the format: dd/MM/yyyy");
+            throw new IllegalArgumentException("Invalid date format. Please use the format: dd/M/yyyy");
         }
 
         player.setName(name);
