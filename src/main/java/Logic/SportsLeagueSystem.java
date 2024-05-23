@@ -39,6 +39,15 @@ public class SportsLeagueSystem {
         }
     }
 
+    /**
+     * Name: createFile
+     * 
+     * @author Rehan Tosif 
+     * Purpose: creating a file with the given name if it doesn't exists.
+     * @param name - the name of the file to be created
+     * @return boolean - true/false indicating wheather the
+     *                   file was deleted or not            
+     */
     boolean createFile(String name) {
 
         try {
@@ -51,6 +60,13 @@ public class SportsLeagueSystem {
         }
     }
 
+    /** Name:  exit
+    * @author  Rehan Tosif
+    * Purpose/description: Called whenever the user's exit's from
+    * the system by clicking the exit button. It exit's the system 
+    * with a status code of 0 and also run's serialize method to save
+    * the objects 
+    */
     public void exit() {
         serialize();
         System.exit(0);
@@ -68,6 +84,15 @@ public class SportsLeagueSystem {
         return teamPlayers;
     }
 
+    /** Name:  exit
+    * @author  Rehan Tosif
+    * Purpose: Called whenever the user's exit's from
+    *          the system by clicking the exit button. It exit's the system 
+    *          with a status code of 0 and also run's serialize method to save
+    *          the objects 
+    * @param   startupFilePath - the path to the file from which predefined.
+    *          data is going to be extracted and loaded in to the system.
+    */
     public void cleanStart(String startupFilePath) {
         File file = new File(startupFilePath);
         Scanner scanner = null;
@@ -114,6 +139,11 @@ public class SportsLeagueSystem {
         }
     }
 
+    /** Name:  serialize
+    * @author  Rehan Tosif
+    * Purpose: This method is suppose take all the teams and members
+    *         from system and serialize them into file called sportsLeagure.ser
+    */ 
     public void serialize() {
         try {
             if (!createFile(serializedFile))
@@ -139,6 +169,11 @@ public class SportsLeagueSystem {
         }
     }
 
+    /** Name:  deserialize
+    * @author  Rehan Tosif
+    * Purpose: This method is suppose to extract the serialized content
+    *         from the sportsLeague.ser file and load it into the system.
+    */ 
     @SuppressWarnings("unchecked")
     public void deserialize() {
         try {
@@ -327,15 +362,41 @@ public class SportsLeagueSystem {
         }
     }
     
+    /** Name:  addManager
+    * @author  Rehan Tosif
+    * Purpose: This method is suppose to extract the serialized content
+    *          from the sportsLeague.ser file and load it into the system.
+    * 
+    * @param manager         The manager to be added to the system
+    * @param teamId          The ID of the team to alter.
+    * @throws Exception If team is not found
+    * 
+    */ 
     public void addManager(Manager manager, int teamId) throws Exception {
         Team team = getTeam(teamId);
         team.setManager(manager);
     }
-
+    
+    /**
+     * Name: deleteTeam
+     * 
+     * @author Rehan Tosif 
+     * Purpose: deleting a team from the system
+     * @param team - the team instance to be returned
+     * @return void - nothing is returned
+     */
     public void deleteTeam(Team team) {
         teams.remove(team);
     }
 
+    /**
+     * Name: getManagerById
+     * 
+     * @author Rehan Tosif 
+     * Purpose: Getting a Manager from the system
+     * @param managerID - the id of the maanger to be returned
+     * @return Player - manager corresponding to the Id provided
+     */
     public Manager getManagerById(int managerID) {
         for (Team team : teams) {
             Manager manager = team.getManager();
@@ -402,6 +463,15 @@ public class SportsLeagueSystem {
         return -1;
     }
 
+    /**
+     * Name: getTeam
+     * 
+     * @author Rehan Tosif 
+     * Purpose: Getting a team from the system
+     * @param teamId - the id of the team to be returned
+     * @return Team - team corresponding to the Id provided
+     * @throws Exception - when there is no team corresponding to the id.  
+     */
     public Team getTeam(int teamId) throws Exception {
         for (Team team : teams) {
             if (team.getTeamId() == teamId)
@@ -419,6 +489,15 @@ public class SportsLeagueSystem {
         return -1;
     }
 
+    /**
+     * Name: getPlayer
+     * 
+     * @author Rehan Tosif 
+     * Purpose: Getting a player from the system
+     * @param playerId - the id of the player to be returned
+     * @return Player - player corresponding to the Id provided
+     * @throws Exception - when there is no player corresponding to the id.  
+     */
     public Player getPlayer(int playerId) throws Exception {
         for (Player player : players) {
             if (player.getId() == playerId)
@@ -558,6 +637,16 @@ public class SportsLeagueSystem {
 
     }
 
+
+    /**
+    * Name: removeMember
+    * 
+    * @author Rehan Tosif
+    * Purpose: To find the member weather manager or player and delete from 
+    *          within the system and delete it from the system
+    * @param memberId - the ID of the member to be removed from the system
+    * @return void - never returns a value
+    */    
     public void removeMember(int memberId) {
 
         for (Team team : teams) {
