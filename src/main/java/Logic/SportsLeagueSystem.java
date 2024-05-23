@@ -221,7 +221,7 @@ public class SportsLeagueSystem {
         try {
             LocalDate.parse(dob, formatter);
         } catch (DateTimeParseException e) {
-            throw new IllegalArgumentException("Invalid date format. Please use the format: dd/MM/yyyy");
+            throw new IllegalArgumentException("Invalid date format. Please use the format: dd/M/yyyy");
         }
 
         player.setName(name);
