@@ -217,7 +217,7 @@ public class SportsLeagueSystem {
             throw new IllegalArgumentException("Salary cannot be negative");
         }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/M/yyyy");
         try {
             LocalDate.parse(dob, formatter);
         } catch (DateTimeParseException e) {
@@ -326,7 +326,7 @@ public class SportsLeagueSystem {
             throw e;
         }
     }
-    
+
     public void addManager(Manager manager, int teamId) throws Exception {
         Team team = getTeam(teamId);
         team.setManager(manager);
