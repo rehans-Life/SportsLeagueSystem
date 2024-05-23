@@ -99,9 +99,15 @@ public class SportsLeagueSystem {
     *          the objects 
     * @param   startupFilePath - the path to the file from which predefined.
     *          data is going to be extracted and loaded in to the system.
+    * @return boolean - indicating whether the file was successfully loaded or not.
     */
-    public void cleanStart(String startupFilePath) {
+    public boolean cleanStart(String startupFilePath) {
         File file = new File(startupFilePath);
+        
+        if (!file.exists()) {
+            return false;
+        }
+        
         Scanner scanner = null;
 
         teams.clear();
@@ -136,13 +142,14 @@ public class SportsLeagueSystem {
             for (int i = 0; i < nonAssignedPlayers; i++) {
                 players.add(new Player(scanner));
             }
-
+            
+            scanner.close();
+            return true;
+            
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("Not Found");
-        } finally {
-            if (scanner != null)
-                scanner.close();
+            if (scanner != null) scanner.close();
+            return false;
         }
     }
 
