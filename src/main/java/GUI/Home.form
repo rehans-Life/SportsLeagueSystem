@@ -213,11 +213,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-<<<<<<< HEAD
           <AbsoluteConstraints x="0" y="0" width="750" height="480"/>
-=======
-          <AbsoluteConstraints x="10" y="0" width="750" height="490"/>
->>>>>>> 3ce2a67a7bdd97ad0e2d2011c22df113ba30bd88
         </Constraint>
       </Constraints>
 
@@ -1998,11 +1994,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnAlterTeam" min="-2" max="-2" attributes="0"/>
-<<<<<<< HEAD
                           <EmptySpace min="0" pref="82" max="32767" attributes="0"/>
-=======
-                          <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
->>>>>>> 3ce2a67a7bdd97ad0e2d2011c22df113ba30bd88
                       </Group>
                   </Group>
                 </DimensionLayout>
