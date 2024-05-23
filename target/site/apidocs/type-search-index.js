@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"GUI","l":"Home"},{"p":"Logic","l":"Manager"},{"p":"Logic","l":"Member"},{"p":"Logic","l":"Player"},{"p":"Logic","l":"SportsLeagueSystem"},{"p":"com.mycompany.sportsleaguesystem","l":"SportsLeagueSystemDriver"},{"p":"Logic","l":"Team"}];updateSearchResults();

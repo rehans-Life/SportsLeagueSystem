@@ -1,0 +1,49 @@
+@options
+@packages
+-classpath
+'C:/Users/Rehan/.m2/repository/org/netbeans/external/AbsoluteLayout/RELEASE210/AbsoluteLayout-RELEASE210.jar'
+-encoding
+'UTF-8'
+-protected
+-source
+'17'
+-sourcepath
+'C:/Users/Rehan/Downloads/SportsLeagueSystem/SportsLeagueSystem/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Rehan/Downloads/SportsLeagueSystem/SportsLeagueSystem/target/site/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'SportsLeagueSystem 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'SportsLeagueSystem 1.0-SNAPSHOT API'
+com.mycompany.sportsleaguesystem
+GUI
+Logic
+C:\Users\Rehan\.m2\repository\org\netbeans\external\AbsoluteLayout\RELEASE210\AbsoluteLayout-RELEASE210.jar = 1714730113229
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\src\main\java = 1715664568093
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\allclasses-index.html = 1716487557794
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\allpackages-index.html = 1716487557798
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\element-list = 1716487557495
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\help-doc.html = 1716487557846
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\index-all.html = 1716487557834
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\index.html = 1716487557769
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\jquery-ui.overrides.css = 1716487557873
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\member-search-index.js = 1716487557805
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\module-search-index.js = 1716487557800
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\overview-summary.html = 1716487557840
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\overview-tree.html = 1716487557763
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\package-search-index.js = 1716487557802
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\script.js = 1716487557851
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\search.js = 1716487557858
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\serialized-form.html = 1716487557692
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\stylesheet.css = 1716487557849
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\tag-search-index.js = 1716487557807
+C:\Users\Rehan\Downloads\SportsLeagueSystem\SportsLeagueSystem\target\site\apidocs\type-search-index.js = 1716487557803

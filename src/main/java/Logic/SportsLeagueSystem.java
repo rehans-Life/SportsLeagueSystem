@@ -45,7 +45,7 @@ public class SportsLeagueSystem {
      * @author Rehan Tosif 
      * Purpose: creating a file with the given name if it doesn't exists.
      * @param name - the name of the file to be created
-     * @return bool - true/false indicating whether the
+     * @return boolean - true/false indicating whether the
      *                   file was deleted or not            
      */
     boolean createFile(String name) {
@@ -62,16 +62,23 @@ public class SportsLeagueSystem {
 
     /** Name:  exit
     * @author  Rehan Tosif
-    * Purpose/description: Called whenever the user's exit's from
-    * the system by clicking the exit button. It exit's the system 
-    * with a status code of 0 and also run's serialize method to save
-    * the objects 
+    * Purpose: Called whenever the user's exit's from
+    *          the system by clicking the exit button. It exit's the system 
+    *          with a status code of 0 and also run's serialize method to save
+    *          the objects 
     */
     public void exit() {
         serialize();
         System.exit(0);
     }
 
+    /** Name:  getPlayersFromTeam
+    * @author  Rehan Tosif
+    * Purpose: returns an array of players that belong to a specific team.
+    * @param teamId - Id of team whose players are to be retrieved.
+    * @return   Player[] - An array list containing of all the players
+    *           that have the same team id
+    */
     public ArrayList<Player> getPlayersFromTeam(int teamId) {
         ArrayList<Player> teamPlayers = new ArrayList<>();
 
@@ -84,7 +91,7 @@ public class SportsLeagueSystem {
         return teamPlayers;
     }
 
-    /** Name:  exit
+    /** Name:  cleanStart
     * @author  Rehan Tosif
     * Purpose: Called whenever the user's exit's from
     *          the system by clicking the exit button. It exit's the system 
@@ -224,6 +231,13 @@ public class SportsLeagueSystem {
         return teams;
     }
 
+    /**
+     * Name: addTeam
+     * 
+     * @author Rehan Tosif 
+     * Purpose: adding a team from the system
+     * @param team - the team instance to be added
+     */
     public void addTeam(Team team) {
         teams.add(team);
     }
@@ -382,8 +396,7 @@ public class SportsLeagueSystem {
      * 
      * @author Rehan Tosif 
      * Purpose: deleting a team from the system
-     * @param team - the team instance to be returned
-     * @return void - nothing is returned
+     * @param team - the team instance to be deleted
      */
     public void deleteTeam(Team team) {
         teams.remove(team);
@@ -407,6 +420,14 @@ public class SportsLeagueSystem {
         return null;
     }
 
+
+    /** Name:  getManagerIds
+    * @author  Rehan Tosif
+    * Purpose: returns an array of managers ids that can be used inside of 
+    *          the jcombo box
+    * @return int[] - An array containing the ids of all the maangers 
+    *                 in the system  
+    */
     public int[] getManagerIds() {
         ArrayList<Integer> managerIds = new ArrayList<>();
 
@@ -427,6 +448,13 @@ public class SportsLeagueSystem {
         return idsArray;
     }
 
+    /** Name:  getManagerIdString
+    * @author  Rehan Tosif
+    * Purpose: returns an array of managers ids as strings that can be used inside of 
+    *          the Jcombo box
+    * @return int[] - An array containing the ids of all the managers 
+    *                 in the system  
+    */
     public String[] getManagerIdString() {
         int[] managerId = getManagerIds();
         String[] stringManagerIds = intArrayToStringArray(managerId);
@@ -444,6 +472,13 @@ public class SportsLeagueSystem {
         return stringArray;
     }
 
+    /** Name:  getPlayerById
+    * @author  Rehan Tosif
+    * Purpose: returns player corresponding to the id
+    * @param playerId - id of the player to be retrieved
+    * @return Player - the player corresponding to the id
+    *                  passed as argument
+    */
     public Player getPlayerById(int playerId) {
         for (Player player : players) {
             if (player.getId() == playerId) {
@@ -451,16 +486,6 @@ public class SportsLeagueSystem {
             }
         }
         return null;
-    }
-
-    public int getIndexOfPlayerInArr(int playerId) {
-
-        for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getId() == playerId) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     /**
@@ -506,6 +531,12 @@ public class SportsLeagueSystem {
         throw new Exception("Player not found");
     }
 
+    /** Name:  getTeamNames
+    * @author  Rehan Tosif
+    * Purpose: returns an array of team names that can be used inside of 
+    *          the Jcombo box
+    * @return String[] - An array containing the names of all the teams
+    */
     public String[] getTeamNames() {
         int teamsSize = teams.size();
 
@@ -517,6 +548,12 @@ public class SportsLeagueSystem {
         return teamNames;
     }
 
+    /** Name:  getTeamIDs
+    * @author  Rehan Tosif
+    * Purpose: returns an array of team ids that can be used inside of 
+    *          the jcombo box
+    * @return String[] - An array containing the ids of all the teams
+    */
     public String[] getTeamIDs() {
         int teamsSize = teams.size();
 
@@ -528,6 +565,12 @@ public class SportsLeagueSystem {
         return teamIDs;
     }
 
+    /** Name:  getPlayerIDs
+    * @author  Rehan Tosif
+    * Purpose: returns an array of player ids that can be used inside of 
+    *          the Jcombo box
+    * @return String[] - An array containing the ids of all the teams
+    */
     public String[] getPlayerIDs() {
         int numOfPlayers = players.size();
 
@@ -538,22 +581,13 @@ public class SportsLeagueSystem {
 
         return playerId;
     }
-
-    public Team getTeamByName(String teamName) throws Exception {
-        for (Team team : getTeams()) {
-            if (team.getName().equalsIgnoreCase(teamName))
-                return team;
-        }
-        throw new Exception("Team not found");
-    }
-
+    
     /**
      * Name: addPlayer
      * 
      * @author Zainab Abdulhusain
      *         Purpose/description: Adding a player to the system
      * @param player - the player object to be added to the league
-     * @return void - never returns a value
      */
     public void addPlayer(Player player) {
         // add the player to the players ArrayList
@@ -607,8 +641,8 @@ public class SportsLeagueSystem {
      *         team
      * @param playerID  - the id of the player to be transferred
      * @param newTeamID - the id of the team that the player is getting
-     *                  assigned/transferred to
-     * @return void - never returns a value
+     *                  assigned/transferred too.
+     * @throws Exception - If team or player are not found.
      */
     public void transferPlayer(int playerID, int newTeamID) throws Exception {
         // retrieve the player object using the player id
@@ -645,7 +679,6 @@ public class SportsLeagueSystem {
     * Purpose: To find the member weather manager or player and delete from 
     *          within the system and delete it from the system
     * @param memberId - the ID of the member to be removed from the system
-    * @return void - never returns a value
     */    
     public void removeMember(int memberId) {
 
@@ -672,7 +705,6 @@ public class SportsLeagueSystem {
      * @author Zainab Abdulhusain
      *         Purpose/description: removing a player from the players list
      * @param player - the object of the player to be removed
-     * @return void - never returns a value
      */
     public void removePlayer(Player player) {
         players.remove(player); // remove the player object from the players ArrayList
